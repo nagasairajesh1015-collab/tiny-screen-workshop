@@ -10,33 +10,278 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as GuardRouteImport } from './routes/guard'
+import { Route as RegisterRouteImport } from './routes/register'
+import { Route as ResidentRouteImport } from './routes/resident'
+import { Route as SecretaryRouteImport } from './routes/secretary'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as AdminApartmentsRouteImport } from './routes/admin.apartments'
+import { Route as AdminSubscriptionsRouteImport } from './routes/admin.subscriptions'
+import { Route as AdminUsersRouteImport } from './routes/admin.users'
+import { Route as SecretaryIndexRouteImport } from './routes/secretary.index'
+import { Route as SecretaryCommunityRouteImport } from './routes/secretary.community'
+import { Route as SecretaryComplaintsRouteImport } from './routes/secretary.complaints'
+import { Route as SecretaryExpensesRouteImport } from './routes/secretary.expenses'
+import { Route as SecretaryMaintenanceRouteImport } from './routes/secretary.maintenance'
+import { Route as SecretaryMoreRouteImport } from './routes/secretary.more'
+import { Route as SecretaryOperationsRouteImport } from './routes/secretary.operations'
+import { Route as SecretaryParkingRouteImport } from './routes/secretary.parking'
+import { Route as SecretaryResidentsRouteImport } from './routes/secretary.residents'
+import { Route as SecretaryVisitorsRouteImport } from './routes/secretary.visitors'
+import { Route as SecretaryFlatFlatIdRouteImport } from './routes/secretary.flat.$flatId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GuardRoute = GuardRouteImport.update({
+  id: '/guard',
+  path: '/guard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RegisterRoute = RegisterRouteImport.update({
+  id: '/register',
+  path: '/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResidentRoute = ResidentRouteImport.update({
+  id: '/resident',
+  path: '/resident',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SecretaryRoute = SecretaryRouteImport.update({
+  id: '/secretary',
+  path: '/secretary',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminApartmentsRoute = AdminApartmentsRouteImport.update({
+  id: '/apartments',
+  path: '/apartments',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminSubscriptionsRoute = AdminSubscriptionsRouteImport.update({
+  id: '/subscriptions',
+  path: '/subscriptions',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminUsersRoute = AdminUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => AdminRoute,
+} as any)
+const SecretaryIndexRoute = SecretaryIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => SecretaryRoute,
+} as any)
+const SecretaryCommunityRoute = SecretaryCommunityRouteImport.update({
+  id: '/community',
+  path: '/community',
+  getParentRoute: () => SecretaryRoute,
+} as any)
+const SecretaryComplaintsRoute = SecretaryComplaintsRouteImport.update({
+  id: '/complaints',
+  path: '/complaints',
+  getParentRoute: () => SecretaryRoute,
+} as any)
+const SecretaryExpensesRoute = SecretaryExpensesRouteImport.update({
+  id: '/expenses',
+  path: '/expenses',
+  getParentRoute: () => SecretaryRoute,
+} as any)
+const SecretaryMaintenanceRoute = SecretaryMaintenanceRouteImport.update({
+  id: '/maintenance',
+  path: '/maintenance',
+  getParentRoute: () => SecretaryRoute,
+} as any)
+const SecretaryMoreRoute = SecretaryMoreRouteImport.update({
+  id: '/more',
+  path: '/more',
+  getParentRoute: () => SecretaryRoute,
+} as any)
+const SecretaryOperationsRoute = SecretaryOperationsRouteImport.update({
+  id: '/operations',
+  path: '/operations',
+  getParentRoute: () => SecretaryRoute,
+} as any)
+const SecretaryParkingRoute = SecretaryParkingRouteImport.update({
+  id: '/parking',
+  path: '/parking',
+  getParentRoute: () => SecretaryRoute,
+} as any)
+const SecretaryResidentsRoute = SecretaryResidentsRouteImport.update({
+  id: '/residents',
+  path: '/residents',
+  getParentRoute: () => SecretaryRoute,
+} as any)
+const SecretaryVisitorsRoute = SecretaryVisitorsRouteImport.update({
+  id: '/visitors',
+  path: '/visitors',
+  getParentRoute: () => SecretaryRoute,
+} as any)
+const SecretaryFlatFlatIdRoute = SecretaryFlatFlatIdRouteImport.update({
+  id: '/flat/$flatId',
+  path: '/flat/$flatId',
+  getParentRoute: () => SecretaryRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/guard': typeof GuardRoute
+  '/register': typeof RegisterRoute
+  '/resident': typeof ResidentRoute
+  '/secretary': typeof SecretaryRouteWithChildren
+  '/admin/apartments': typeof AdminApartmentsRoute
+  '/admin/subscriptions': typeof AdminSubscriptionsRoute
+  '/admin/users': typeof AdminUsersRoute
+  '/secretary/community': typeof SecretaryCommunityRoute
+  '/secretary/complaints': typeof SecretaryComplaintsRoute
+  '/secretary/expenses': typeof SecretaryExpensesRoute
+  '/secretary/maintenance': typeof SecretaryMaintenanceRoute
+  '/secretary/more': typeof SecretaryMoreRoute
+  '/secretary/operations': typeof SecretaryOperationsRoute
+  '/secretary/parking': typeof SecretaryParkingRoute
+  '/secretary/residents': typeof SecretaryResidentsRoute
+  '/secretary/visitors': typeof SecretaryVisitorsRoute
+  '/admin/': typeof AdminIndexRoute
+  '/secretary/': typeof SecretaryIndexRoute
+  '/secretary/flat/$flatId': typeof SecretaryFlatFlatIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/guard': typeof GuardRoute
+  '/register': typeof RegisterRoute
+  '/resident': typeof ResidentRoute
+  '/admin/apartments': typeof AdminApartmentsRoute
+  '/admin/subscriptions': typeof AdminSubscriptionsRoute
+  '/admin/users': typeof AdminUsersRoute
+  '/secretary/community': typeof SecretaryCommunityRoute
+  '/secretary/complaints': typeof SecretaryComplaintsRoute
+  '/secretary/expenses': typeof SecretaryExpensesRoute
+  '/secretary/maintenance': typeof SecretaryMaintenanceRoute
+  '/secretary/more': typeof SecretaryMoreRoute
+  '/secretary/operations': typeof SecretaryOperationsRoute
+  '/secretary/parking': typeof SecretaryParkingRoute
+  '/secretary/residents': typeof SecretaryResidentsRoute
+  '/secretary/visitors': typeof SecretaryVisitorsRoute
+  '/admin': typeof AdminIndexRoute
+  '/secretary': typeof SecretaryIndexRoute
+  '/secretary/flat/$flatId': typeof SecretaryFlatFlatIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/guard': typeof GuardRoute
+  '/register': typeof RegisterRoute
+  '/resident': typeof ResidentRoute
+  '/secretary': typeof SecretaryRouteWithChildren
+  '/admin/apartments': typeof AdminApartmentsRoute
+  '/admin/subscriptions': typeof AdminSubscriptionsRoute
+  '/admin/users': typeof AdminUsersRoute
+  '/secretary/community': typeof SecretaryCommunityRoute
+  '/secretary/complaints': typeof SecretaryComplaintsRoute
+  '/secretary/expenses': typeof SecretaryExpensesRoute
+  '/secretary/maintenance': typeof SecretaryMaintenanceRoute
+  '/secretary/more': typeof SecretaryMoreRoute
+  '/secretary/operations': typeof SecretaryOperationsRoute
+  '/secretary/parking': typeof SecretaryParkingRoute
+  '/secretary/residents': typeof SecretaryResidentsRoute
+  '/secretary/visitors': typeof SecretaryVisitorsRoute
+  '/admin/': typeof AdminIndexRoute
+  '/secretary/': typeof SecretaryIndexRoute
+  '/secretary/flat/$flatId': typeof SecretaryFlatFlatIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/guard'
+    | '/register'
+    | '/resident'
+    | '/secretary'
+    | '/admin/apartments'
+    | '/admin/subscriptions'
+    | '/admin/users'
+    | '/secretary/community'
+    | '/secretary/complaints'
+    | '/secretary/expenses'
+    | '/secretary/maintenance'
+    | '/secretary/more'
+    | '/secretary/operations'
+    | '/secretary/parking'
+    | '/secretary/residents'
+    | '/secretary/visitors'
+    | '/admin/'
+    | '/secretary/'
+    | '/secretary/flat/$flatId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/guard'
+    | '/register'
+    | '/resident'
+    | '/admin/apartments'
+    | '/admin/subscriptions'
+    | '/admin/users'
+    | '/secretary/community'
+    | '/secretary/complaints'
+    | '/secretary/expenses'
+    | '/secretary/maintenance'
+    | '/secretary/more'
+    | '/secretary/operations'
+    | '/secretary/parking'
+    | '/secretary/residents'
+    | '/secretary/visitors'
+    | '/admin'
+    | '/secretary'
+    | '/secretary/flat/$flatId'
+  id:
+    | '__root__'
+    | '/'
+    | '/admin'
+    | '/guard'
+    | '/register'
+    | '/resident'
+    | '/secretary'
+    | '/admin/apartments'
+    | '/admin/subscriptions'
+    | '/admin/users'
+    | '/secretary/community'
+    | '/secretary/complaints'
+    | '/secretary/expenses'
+    | '/secretary/maintenance'
+    | '/secretary/more'
+    | '/secretary/operations'
+    | '/secretary/parking'
+    | '/secretary/residents'
+    | '/secretary/visitors'
+    | '/admin/'
+    | '/secretary/'
+    | '/secretary/flat/$flatId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRouteWithChildren
+  GuardRoute: typeof GuardRoute
+  RegisterRoute: typeof RegisterRoute
+  ResidentRoute: typeof ResidentRoute
+  SecretaryRoute: typeof SecretaryRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +293,204 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/guard': {
+      id: '/guard'
+      path: '/guard'
+      fullPath: '/guard'
+      preLoaderRoute: typeof GuardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/register': {
+      id: '/register'
+      path: '/register'
+      fullPath: '/register'
+      preLoaderRoute: typeof RegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/resident': {
+      id: '/resident'
+      path: '/resident'
+      fullPath: '/resident'
+      preLoaderRoute: typeof ResidentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/secretary': {
+      id: '/secretary'
+      path: '/secretary'
+      fullPath: '/secretary'
+      preLoaderRoute: typeof SecretaryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/apartments': {
+      id: '/admin/apartments'
+      path: '/apartments'
+      fullPath: '/admin/apartments'
+      preLoaderRoute: typeof AdminApartmentsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/subscriptions': {
+      id: '/admin/subscriptions'
+      path: '/subscriptions'
+      fullPath: '/admin/subscriptions'
+      preLoaderRoute: typeof AdminSubscriptionsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/users': {
+      id: '/admin/users'
+      path: '/users'
+      fullPath: '/admin/users'
+      preLoaderRoute: typeof AdminUsersRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/secretary/': {
+      id: '/secretary/'
+      path: '/'
+      fullPath: '/secretary/'
+      preLoaderRoute: typeof SecretaryIndexRouteImport
+      parentRoute: typeof SecretaryRoute
+    }
+    '/secretary/community': {
+      id: '/secretary/community'
+      path: '/community'
+      fullPath: '/secretary/community'
+      preLoaderRoute: typeof SecretaryCommunityRouteImport
+      parentRoute: typeof SecretaryRoute
+    }
+    '/secretary/complaints': {
+      id: '/secretary/complaints'
+      path: '/complaints'
+      fullPath: '/secretary/complaints'
+      preLoaderRoute: typeof SecretaryComplaintsRouteImport
+      parentRoute: typeof SecretaryRoute
+    }
+    '/secretary/expenses': {
+      id: '/secretary/expenses'
+      path: '/expenses'
+      fullPath: '/secretary/expenses'
+      preLoaderRoute: typeof SecretaryExpensesRouteImport
+      parentRoute: typeof SecretaryRoute
+    }
+    '/secretary/maintenance': {
+      id: '/secretary/maintenance'
+      path: '/maintenance'
+      fullPath: '/secretary/maintenance'
+      preLoaderRoute: typeof SecretaryMaintenanceRouteImport
+      parentRoute: typeof SecretaryRoute
+    }
+    '/secretary/more': {
+      id: '/secretary/more'
+      path: '/more'
+      fullPath: '/secretary/more'
+      preLoaderRoute: typeof SecretaryMoreRouteImport
+      parentRoute: typeof SecretaryRoute
+    }
+    '/secretary/operations': {
+      id: '/secretary/operations'
+      path: '/operations'
+      fullPath: '/secretary/operations'
+      preLoaderRoute: typeof SecretaryOperationsRouteImport
+      parentRoute: typeof SecretaryRoute
+    }
+    '/secretary/parking': {
+      id: '/secretary/parking'
+      path: '/parking'
+      fullPath: '/secretary/parking'
+      preLoaderRoute: typeof SecretaryParkingRouteImport
+      parentRoute: typeof SecretaryRoute
+    }
+    '/secretary/residents': {
+      id: '/secretary/residents'
+      path: '/residents'
+      fullPath: '/secretary/residents'
+      preLoaderRoute: typeof SecretaryResidentsRouteImport
+      parentRoute: typeof SecretaryRoute
+    }
+    '/secretary/visitors': {
+      id: '/secretary/visitors'
+      path: '/visitors'
+      fullPath: '/secretary/visitors'
+      preLoaderRoute: typeof SecretaryVisitorsRouteImport
+      parentRoute: typeof SecretaryRoute
+    }
+    '/secretary/flat/$flatId': {
+      id: '/secretary/flat/$flatId'
+      path: '/flat/$flatId'
+      fullPath: '/secretary/flat/$flatId'
+      preLoaderRoute: typeof SecretaryFlatFlatIdRouteImport
+      parentRoute: typeof SecretaryRoute
+    }
   }
 }
 
+interface AdminRouteChildren {
+  AdminApartmentsRoute: typeof AdminApartmentsRoute
+  AdminSubscriptionsRoute: typeof AdminSubscriptionsRoute
+  AdminUsersRoute: typeof AdminUsersRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminApartmentsRoute: AdminApartmentsRoute,
+  AdminSubscriptionsRoute: AdminSubscriptionsRoute,
+  AdminUsersRoute: AdminUsersRoute,
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
+interface SecretaryRouteChildren {
+  SecretaryCommunityRoute: typeof SecretaryCommunityRoute
+  SecretaryComplaintsRoute: typeof SecretaryComplaintsRoute
+  SecretaryExpensesRoute: typeof SecretaryExpensesRoute
+  SecretaryMaintenanceRoute: typeof SecretaryMaintenanceRoute
+  SecretaryMoreRoute: typeof SecretaryMoreRoute
+  SecretaryOperationsRoute: typeof SecretaryOperationsRoute
+  SecretaryParkingRoute: typeof SecretaryParkingRoute
+  SecretaryResidentsRoute: typeof SecretaryResidentsRoute
+  SecretaryVisitorsRoute: typeof SecretaryVisitorsRoute
+  SecretaryIndexRoute: typeof SecretaryIndexRoute
+  SecretaryFlatFlatIdRoute: typeof SecretaryFlatFlatIdRoute
+}
+
+const SecretaryRouteChildren: SecretaryRouteChildren = {
+  SecretaryCommunityRoute: SecretaryCommunityRoute,
+  SecretaryComplaintsRoute: SecretaryComplaintsRoute,
+  SecretaryExpensesRoute: SecretaryExpensesRoute,
+  SecretaryMaintenanceRoute: SecretaryMaintenanceRoute,
+  SecretaryMoreRoute: SecretaryMoreRoute,
+  SecretaryOperationsRoute: SecretaryOperationsRoute,
+  SecretaryParkingRoute: SecretaryParkingRoute,
+  SecretaryResidentsRoute: SecretaryResidentsRoute,
+  SecretaryVisitorsRoute: SecretaryVisitorsRoute,
+  SecretaryIndexRoute: SecretaryIndexRoute,
+  SecretaryFlatFlatIdRoute: SecretaryFlatFlatIdRoute,
+}
+
+const SecretaryRouteWithChildren = SecretaryRoute._addFileChildren(
+  SecretaryRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRouteWithChildren,
+  GuardRoute: GuardRoute,
+  RegisterRoute: RegisterRoute,
+  ResidentRoute: ResidentRoute,
+  SecretaryRoute: SecretaryRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
