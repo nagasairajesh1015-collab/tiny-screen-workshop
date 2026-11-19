@@ -30,7 +30,7 @@ export function Section({ title, action, children, className }: { title: string;
   );
 }
 
-export function Tile({ children, className, onClick }: { children: ReactNode; className?: string; onClick?: () => void }) {
+export function Tile({ children, className, onClick }: { children: ReactNode; className?: string; onClick?: (() => void) | undefined }) {
   return (
     <div
       onClick={onClick}
@@ -46,7 +46,7 @@ const TONES = {
   warning: "bg-warning-soft text-warning",
   danger: "bg-danger-soft text-destructive",
   info: "bg-info-soft text-info",
-  coral: "bg-accent text-accent-foreground",
+  brand: "bg-accent text-accent-foreground",
   muted: "bg-muted text-muted-foreground",
 } as const;
 export type Tone = keyof typeof TONES;
@@ -55,8 +55,8 @@ const STATUS_TONE: Record<string, Tone> = {
   Paid: "success", Approved: "success", Active: "success", Resolved: "success", Inside: "info", Going: "success", Present: "success",
   Pending: "warning", "Partially Paid": "warning", "In Progress": "info", Submitted: "warning", Trial: "warning", Open: "warning", Maybe: "warning", Medium: "warning",
   Unpaid: "danger", Rejected: "danger", Emergency: "danger", High: "danger", Deactivated: "danger", Absent: "danger", Urgent: "danger",
-  Occupied: "info", Rented: "coral", Vacant: "muted", "Under Maintenance": "warning", Exited: "muted", Low: "muted", Free: "muted", Premium: "coral",
-  Maintenance: "info", General: "muted", Event: "coral",
+  Occupied: "info", Rented: "brand", Vacant: "muted", "Under Maintenance": "warning", Exited: "muted", Low: "muted", Free: "muted", Premium: "brand",
+  Maintenance: "info", General: "muted", Event: "brand",
 };
 
 export function Pill({ children, tone, className }: { children: ReactNode; tone?: Tone; className?: string }) {
@@ -104,7 +104,7 @@ export function Initials({ name, className }: { name: string; className?: string
   return <span className={cn("grid size-10 shrink-0 place-items-center rounded-xl bg-secondary font-display text-sm font-semibold text-secondary-foreground", className)}>{ini}</span>;
 }
 
-export function Row({ left, title, subtitle, right, onClick }: { left?: ReactNode; title: ReactNode; subtitle?: ReactNode; right?: ReactNode; onClick?: () => void }) {
+export function Row({ left, title, subtitle, right, onClick }: { left?: ReactNode; title: ReactNode; subtitle?: ReactNode; right?: ReactNode; onClick?: (() => void) | undefined }) {
   return (
     <div onClick={onClick} className={cn("flex items-center gap-3 py-3", onClick && "cursor-pointer")}>
       {left}
@@ -172,4 +172,40 @@ export function Progress({ value, className }: { value: number; className?: stri
       <div className="h-full rounded-full bg-primary transition-all" style={{ width: `${Math.min(100, Math.max(0, value))}%` }} />
     </div>
   );
+}
+
+/** Decorative QR-style pass mark generated from the pass code (not a scannable QR). */
+export function PassMark({ value, className }: { value: string; className?: string }) {
+  const n = 21;
+  let h = 0;
+  for (const ch of value) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
+  const cells: [number, number][] = [];
+  for (let y = 0; y < n; y++) for (let x = 0; x < n; x++) {
+    const finder = (x < 8 && y < 8) || (x > n - 9 && y < 8) || (x < 8 && y > n - 9);
+    if (finder) continue;
+    h = (h * 1103515245 + 12345) >>> 0;
+    if ((h >> 16) % 2 === 0) cells.push([x, y]);
+  }
+  const finder = (x: number, y: number) => (
+    <g key={`${x}-${y}`}>
+      <rect x={x} y={y} width={7} height={7} rx={1.2} className="fill-ink" />
+      <rect x={x + 1} y={y + 1} width={5} height={5} rx={0.8} className="fill-card" />
+      <rect x={x + 2} y={y + 2} width={3} height={3} rx={0.5} className="fill-ink" />
+    </g>
+  );
+  return (
+    <svg viewBox={`-1 -1 ${n + 2} ${n + 2}`} className={cn("size-40", className)} role="img" aria-label={`Pass ${value}`}>
+      <rect x={-1} y={-1} width={n + 2} height={n + 2} rx={2} className="fill-card" />
+      {cells.map(([x, y]) => <rect key={`${x}:${y}`} x={x + 0.08} y={y + 0.08} width={0.84} height={0.84} rx={0.2} className="fill-ink" />)}
+      {finder(0, 0)}{finder(n - 7, 0)}{finder(0, n - 7)}
+    </svg>
+  );
+}
+
+export function Hero({ children, className }: { children: ReactNode; className?: string }) {
+  return <div className={cn("relative overflow-hidden rounded-3xl surface-ink p-5 shadow-card", className)}>{children}</div>;
+}
+
+export function Eyebrow({ children, className }: { children: ReactNode; className?: string }) {
+  return <div className={cn("text-[10px] font-bold uppercase tracking-[0.14em]", className)}>{children}</div>;
 }

@@ -20,7 +20,7 @@ function Register() {
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.name || !form.city || !form.secretary || !form.phone) return toast.error("Fill apartment name, city, secretary and phone.");
+    if (!form.name || !form.city || !form.secretary || !form.phone) return void toast.error("Fill apartment name, city, secretary and phone.");
     registerApartment({ name: form.name, city: form.city, blocks: Number(form.blocks), flats: Number(form.flats), secretary: form.secretary, phone: form.phone });
     setDone(true);
   };
@@ -38,7 +38,7 @@ function Register() {
             <h1 className="text-2xl font-semibold">Sent for approval</h1>
             <p className="text-sm text-muted-foreground">{form.name} is waiting for Admin approval. You'll get a notification once it's active.</p>
             <div className="flex flex-col gap-2 pt-4">
-              <Button asChild variant="coral" size="lg"><Link to="/admin/apartments">See it as Admin</Link></Button>
+              <Button asChild variant="brand" size="lg"><Link to="/admin/apartments">See it as Admin</Link></Button>
               <Button asChild variant="outline" size="lg"><Link to="/">Back to start</Link></Button>
             </div>
           </div>
@@ -69,7 +69,7 @@ function Register() {
               <Field label="Secretary name"><input className={inputCls} value={form.secretary} onChange={set("secretary")} /></Field>
               <Field label="Contact number"><input className={inputCls} value={form.phone} onChange={set("phone")} inputMode="tel" placeholder="+91" /></Field>
             </Tile>
-            <Button type="submit" variant="coral" size="lg" className="w-full">Submit for approval</Button>
+            <Button type="submit" variant="brand" size="lg" className="w-full">Submit for approval</Button>
           </form>
         )}
       </main>

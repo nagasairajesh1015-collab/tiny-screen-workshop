@@ -23,7 +23,7 @@ function AdminHome() {
   return (
     <Screen title="Overview" subtitle="All apartments on ResiCore">
       <div className="grid grid-cols-2 gap-2.5">
-        <Stat label="Apartments" value={apartments.length} hint={`${active.length} active`} icon={<Building />} tone="coral" />
+        <Stat label="Apartments" value={apartments.length} hint={`${active.length} active`} icon={<Building />} tone="brand" />
         <Stat label="Users" value="1,284" hint="+42 this week" icon={<Users />} tone="info" />
         <Stat label="Owners" value="836" icon={<Home />} tone="success" />
         <Stat label="Tenants" value="448" icon={<KeyRound />} tone="warning" />
@@ -56,7 +56,7 @@ function AdminHome() {
             </div>
             <div className="grid grid-cols-2 gap-2">
               <Button variant="outline" onClick={() => { setStatus(a.id, "Rejected"); toast(`${a.name} rejected`); }}>Reject</Button>
-              <Button variant="coral" onClick={() => { setStatus(a.id, "Active"); toast.success(`${a.name} approved — Secretary notified`); }}>Approve</Button>
+              <Button variant="brand" onClick={() => { setStatus(a.id, "Active"); toast.success(`${a.name} approved — Secretary notified`); }}>Approve</Button>
             </div>
           </Tile>
         ))}

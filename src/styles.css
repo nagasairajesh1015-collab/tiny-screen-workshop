@@ -5,14 +5,15 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * ResiCore design system — "Slate & Coral".
- * Slate ink surfaces, cool off-white canvas, a single coral accent.
- * Display: Sora. Body: Manrope (loaded in __root head).
+ * ResiCore design system — taken from the Google Stitch project
+ * "ResiCore Apartment Management App": deep navy ink, teal action colour,
+ * cool blue-white canvas, coral reserved for alerts / SOS.
+ * Display: Plus Jakarta Sans. Body: Inter (loaded in __root head).
  */
 
 @theme inline {
-  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Sora", "Manrope", ui-sans-serif, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Plus Jakarta Sans", "Inter", ui-sans-serif, sans-serif;
 
   --radius-sm: calc(var(--radius) - 6px);
   --radius-md: calc(var(--radius) - 4px);
@@ -51,6 +52,7 @@
   --color-info: var(--info);
   --color-info-soft: var(--info-soft);
   --color-danger-soft: var(--danger-soft);
+  --color-alert: var(--alert);
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
@@ -67,58 +69,60 @@
 }
 
 :root {
-  --radius: 1rem;
-  --background: oklch(0.975 0.004 247);
-  --foreground: oklch(0.268 0.02 252);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.268 0.02 252);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.268 0.02 252);
-  --primary: oklch(0.7 0.185 28);
-  --primary-foreground: oklch(0.99 0.005 30);
-  --secondary: oklch(0.94 0.008 250);
-  --secondary-foreground: oklch(0.268 0.02 252);
-  --muted: oklch(0.952 0.006 250);
-  --muted-foreground: oklch(0.52 0.025 250);
-  --accent: oklch(0.955 0.03 30);
-  --accent-foreground: oklch(0.52 0.16 28);
-  --destructive: oklch(0.6 0.21 25);
-  --destructive-foreground: oklch(0.99 0.005 30);
-  --border: oklch(0.915 0.008 250);
-  --input: oklch(0.9 0.01 250);
-  --ring: oklch(0.7 0.185 28);
+  --radius: 0.875rem;
+  --background: #f8f9ff;
+  --foreground: #0b1c30;
+  --card: #ffffff;
+  --card-foreground: #0b1c30;
+  --popover: #ffffff;
+  --popover-foreground: #0b1c30;
+  --primary: #00897b;
+  --primary-foreground: #ffffff;
+  --secondary: #eff4ff;
+  --secondary-foreground: #1e3e62;
+  --muted: #eef3fc;
+  --muted-foreground: #5b6779;
+  --accent: #dff6f2;
+  --accent-foreground: #006b5f;
+  --destructive: #d9412f;
+  --destructive-foreground: #ffffff;
+  --border: #e1e8f5;
+  --input: #d5deee;
+  --ring: #00a896;
 
-  --ink: oklch(0.268 0.02 252);
-  --ink-soft: oklch(0.42 0.03 250);
-  --ink-foreground: oklch(0.975 0.004 247);
-  --success: oklch(0.58 0.13 162);
-  --success-soft: oklch(0.95 0.04 162);
-  --warning: oklch(0.62 0.14 65);
-  --warning-soft: oklch(0.96 0.05 85);
-  --info: oklch(0.55 0.12 245);
-  --info-soft: oklch(0.95 0.03 245);
-  --danger-soft: oklch(0.95 0.035 25);
+  --ink: #0b192c;
+  --ink-soft: #1e3e62;
+  --ink-foreground: #f3f7ff;
+  --success: #00897b;
+  --success-soft: #dff6f2;
+  --warning: #b96a00;
+  --warning-soft: #fff1d9;
+  --info: #2f5f95;
+  --info-soft: #e3edff;
+  --danger-soft: #ffe7e2;
+  --alert: #f05a44;
 
-  --gradient-ink: linear-gradient(150deg, oklch(0.268 0.02 252) 0%, oklch(0.36 0.03 250) 100%);
-  --gradient-coral: linear-gradient(135deg, oklch(0.72 0.18 32) 0%, oklch(0.66 0.2 22) 100%);
-  --gradient-hero-fade: linear-gradient(180deg, transparent 0%, oklch(0.268 0.02 252 / 0.35) 45%, oklch(0.268 0.02 252) 100%);
-  --shadow-card: 0 1px 2px oklch(0.268 0.02 252 / 0.05), 0 10px 28px -16px oklch(0.268 0.02 252 / 0.25);
-  --shadow-coral: 0 12px 28px -12px oklch(0.7 0.185 28 / 0.6);
-  --shadow-phone: 0 40px 90px -30px oklch(0.268 0.02 252 / 0.55);
+  --gradient-ink: linear-gradient(160deg, #0b192c 0%, #13294a 100%);
+  --gradient-brand: linear-gradient(135deg, #00a896 0%, #00897b 100%);
+  --gradient-alert: linear-gradient(135deg, #f46b55 0%, #e4472f 100%);
+  --gradient-hero-fade: linear-gradient(180deg, transparent 0%, rgb(11 25 44 / 0.35) 45%, #0b192c 100%);
+  --shadow-card: 0 1px 2px rgb(11 28 48 / 0.04), 0 8px 24px -14px rgb(11 28 48 / 0.18);
+  --shadow-brand: 0 12px 26px -12px rgb(0 137 123 / 0.55);
+  --shadow-phone: 0 40px 90px -30px rgb(0 0 0 / 0.6);
 
-  --chart-1: oklch(0.7 0.185 28);
-  --chart-2: oklch(0.42 0.03 250);
-  --chart-3: oklch(0.58 0.13 162);
-  --chart-4: oklch(0.62 0.14 65);
-  --chart-5: oklch(0.55 0.12 245);
-  --sidebar: oklch(0.975 0.004 247);
-  --sidebar-foreground: oklch(0.268 0.02 252);
-  --sidebar-primary: oklch(0.7 0.185 28);
-  --sidebar-primary-foreground: oklch(0.99 0.005 30);
-  --sidebar-accent: oklch(0.94 0.008 250);
-  --sidebar-accent-foreground: oklch(0.268 0.02 252);
-  --sidebar-border: oklch(0.915 0.008 250);
-  --sidebar-ring: oklch(0.7 0.185 28);
+  --chart-1: #00a896;
+  --chart-2: #1e3e62;
+  --chart-3: #f05a44;
+  --chart-4: #b96a00;
+  --chart-5: #6886ae;
+  --sidebar: #f8f9ff;
+  --sidebar-foreground: #0b1c30;
+  --sidebar-primary: #00897b;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #eff4ff;
+  --sidebar-accent-foreground: #0b1c30;
+  --sidebar-border: #e1e8f5;
+  --sidebar-ring: #00a896;
 }
 
 @layer base {
@@ -136,7 +140,7 @@
   }
   h1, h2, h3, h4 {
     font-family: var(--font-display);
-    letter-spacing: -0.02em;
+    letter-spacing: -0.015em;
   }
 }
 
@@ -145,9 +149,14 @@
   color: var(--ink-foreground);
 }
 
-@utility surface-coral {
-  background: var(--gradient-coral);
+@utility surface-brand {
+  background: var(--gradient-brand);
   color: var(--primary-foreground);
+}
+
+@utility surface-alert {
+  background: var(--gradient-alert);
+  color: var(--destructive-foreground);
 }
 
 @utility hero-fade {
@@ -158,8 +167,8 @@
   box-shadow: var(--shadow-card);
 }
 
-@utility shadow-coral {
-  box-shadow: var(--shadow-coral);
+@utility shadow-brand {
+  box-shadow: var(--shadow-brand);
 }
 
 @utility shadow-phone {
@@ -181,8 +190,8 @@
 @utility phone-backdrop {
   background-color: var(--ink);
   background-image:
-    radial-gradient(circle at 20% 15%, oklch(0.7 0.185 28 / 0.25), transparent 40%),
-    radial-gradient(circle at 85% 85%, oklch(0.55 0.12 245 / 0.25), transparent 45%);
+    radial-gradient(circle at 20% 15%, rgb(0 168 150 / 0.22), transparent 40%),
+    radial-gradient(circle at 85% 85%, rgb(30 62 98 / 0.6), transparent 45%);
 }
 
 @keyframes rise-in {

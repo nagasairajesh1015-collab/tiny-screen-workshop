@@ -13,32 +13,32 @@ export const OPENING = { cash: 42000, bank: 142500 };
 export type FlatStatus = "Occupied" | "Vacant" | "Rented" | "Under Maintenance";
 export interface Flat {
   id: string; block: string; floor: number; bhk: string; status: FlatStatus;
-  owner: string; tenant?: string; phone: string; monthly: number; paid: number;
-  prevDue: number; reg: "Approved" | "Pending" | "Deactivated"; slot?: string;
+  owner: string; tenant?: string | undefined; phone: string; monthly: number; paid: number;
+  prevDue: number; reg: "Approved" | "Pending" | "Deactivated"; slot?: string | undefined;
 }
 export interface Payment {
   id: string; flatId: string; amount: number; mode: "Cash" | "UPI" | "Bank";
-  utr?: string; date: string; status: "Pending" | "Approved" | "Rejected"; month: string; screenshot?: string;
+  utr?: string | undefined; date: string; status: "Pending" | "Approved" | "Rejected"; month: string; screenshot?: string | undefined;
 }
 export interface Expense { id: string; category: string; description: string; amount: number; date: string; mode: "Cash" | "Bank" | "UPI"; month: string }
 export type ComplaintStatus = "Submitted" | "Approved" | "In Progress" | "Resolved" | "Rejected";
 export interface Complaint {
   id: string; flatId: string; resident: string; category: string; description: string;
   priority: "Low" | "Medium" | "High" | "Emergency"; status: ComplaintStatus; date: string;
-  assigned?: string; area: "Flat" | "Common area"; comments: string[];
+  assigned?: string | undefined; area: "Flat" | "Common area"; comments: string[];
 }
 export type VisitorStatus = "Pending" | "Approved" | "Rejected" | "Inside" | "Exited";
 export interface Visitor {
   id: string; name: string; phone: string; flatId: string; purpose: string;
   type: "Guest" | "Delivery" | "Cab" | "Service Provider" | "Other";
-  status: VisitorStatus; entry?: string; exit?: string; code: string; date: string;
+  status: VisitorStatus; entry?: string | undefined; exit?: string | undefined; code: string; date: string;
 }
 export interface Notice { id: string; title: string; body: string; date: string; tag: "General" | "Maintenance" | "Urgent" | "Event" }
-export interface EventItem { id: string; title: string; date: string; venue: string; description: string; going: number; maybe: number; no: number; my?: "Going" | "Maybe" | "No"; past?: boolean; photos?: number }
-export interface Poll { id: string; question: string; options: { label: string; votes: number }[]; my?: number; closes: string }
+export interface EventItem { id: string; title: string; date: string; venue: string; description: string; going: number; maybe: number; no: number; my?: "Going" | "Maybe" | "No" | undefined; past?: boolean | undefined; photos?: number | undefined }
+export interface Poll { id: string; question: string; options: { label: string; votes: number }[]; my?: number | undefined; closes: string }
 export interface Fund { id: string; name: string; purpose: string; target: number; collected: number; perUnit: number; closes: string; mine: number }
 export interface Vehicle { id: string; number: string; model: string; type: "Car" | "Bike" | "Scooter" | "Other"; flatId: string; owner: string; status: "Approved" | "Pending" }
-export interface Slot { id: string; type: "Car" | "Bike" | "Visitor"; flatId?: string }
+export interface Slot { id: string; type: "Car" | "Bike" | "Visitor"; flatId?: string | undefined }
 export interface ParkingReport { id: string; vehicle: string; flatId: string; description: string; status: "Open" | "Resolved"; date: string }
 export interface Apartment { id: string; name: string; city: string; flats: number; blocks: number; secretary: string; phone: string; status: "Pending" | "Active" | "Rejected" | "Deactivated"; plan: "Free" | "Premium" | "Trial"; renews: string }
 export interface Notification { id: string; role: Role; title: string; body: string; time: string; read: boolean }
@@ -46,8 +46,8 @@ export interface Staff { id: string; name: string; role: string; phone: string; 
 export interface Reminder { id: string; flats: number; time: string; kind: "Individual" | "Bulk" }
 
 const f = (id: string, owner: string, o: Partial<Flat> = {}): Flat => {
-  const [block, num] = id.split("-");
-  const floor = Number(num[0]);
+  const [block = "", num = ""] = id.split("-");
+  const floor = Number(num.charAt(0));
   const big = num.endsWith("2");
   return {
     id, block, floor, bhk: big ? "3 BHK" : "2 BHK", status: "Occupied", owner,
@@ -148,7 +148,7 @@ const slots: Slot[] = [
     const id = "C-" + String(i + 1).padStart(2, "0");
     return { id, type: "Car", flatId: flats.find((x) => x.slot === id)?.id };
   }),
-  ...Array.from({ length: 8 }, (_, i): Slot => ({ id: "B-" + String(i + 1).padStart(2, "0"), type: "Bike", flatId: i < 5 ? flats[i * 3].id : undefined })),
+  ...Array.from({ length: 8 }, (_, i): Slot => ({ id: "B-" + String(i + 1).padStart(2, "0"), type: "Bike", flatId: i < 5 ? flats[i * 3]?.id : undefined })),
   ...Array.from({ length: 4 }, (_, i): Slot => ({ id: "V-" + String(i + 1).padStart(2, "0"), type: "Visitor", flatId: i === 0 ? "B-101" : undefined })),
 ];
 
@@ -190,7 +190,7 @@ interface State {
   reminders: Reminder[]; categories: string[];
   notify: (role: Role, title: string, body: string) => void;
   markAllRead: (role: Role) => void;
-  submitPayment: (p: { flatId: string; amount: number; utr: string; mode: "UPI" | "Bank"; screenshot?: string }) => { ok: boolean; error?: string };
+  submitPayment: (p: { flatId: string; amount: number; utr: string; mode: "UPI" | "Bank"; screenshot?: string | undefined }) => { ok: boolean; error?: string | undefined };
   reviewPayment: (id: string, approve: boolean) => void;
   markCashPaid: (flatId: string, amount: number) => void;
   sendReminders: (flatIds: string[]) => void;
@@ -199,8 +199,8 @@ interface State {
   addCategory: (c: string) => void;
   updateFlat: (id: string, patch: Partial<Flat>) => void;
   addComplaint: (c: Omit<Complaint, "id" | "date" | "status" | "comments">) => void;
-  updateComplaint: (id: string, patch: Partial<Complaint>, comment?: string) => void;
-  addVisitor: (v: Omit<Visitor, "id" | "code" | "date" | "status"> & { status?: VisitorStatus }) => Visitor;
+  updateComplaint: (id: string, patch: Partial<Complaint>, comment?: string) => void | undefined;
+  addVisitor: (v: Omit<Visitor, "id" | "code" | "date" | "status"> & { status?: VisitorStatus | undefined }) => Visitor;
   setVisitorStatus: (id: string, status: VisitorStatus) => void;
   addNotice: (n: Omit<Notice, "id" | "date">) => void;
   addEvent: (e: Pick<EventItem, "title" | "date" | "venue" | "description">) => void;
@@ -212,7 +212,7 @@ interface State {
   addVehicle: (v: Omit<Vehicle, "id" | "status">) => void;
   approveVehicle: (id: string) => void;
   removeVehicle: (id: string) => void;
-  assignSlot: (slotId: string, flatId?: string) => void;
+  assignSlot: (slotId: string, flatId?: string) => void | undefined;
   reportParking: (r: Omit<ParkingReport, "id" | "status" | "date">) => void;
   resolveParking: (id: string) => void;
   registerApartment: (a: Pick<Apartment, "name" | "city" | "flats" | "blocks" | "secretary" | "phone">) => void;

@@ -44,7 +44,7 @@ function FlatDetail() {
       </div>
 
       <div className="grid grid-cols-2 gap-2">
-        <Button variant="coral" disabled={due === 0} onClick={() => { s.sendReminders([f.id]); toast.success("Reminder sent"); }}><BellRing /> Remind</Button>
+        <Button variant="brand" disabled={due === 0} onClick={() => { s.sendReminders([f.id]); toast.success("Reminder sent"); }}><BellRing /> Remind</Button>
         <Button variant="outline" onClick={() => toast.success(`${f.id} statement ready (demo)`)}><Download /> Statement</Button>
       </div>
 

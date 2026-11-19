@@ -43,7 +43,7 @@ function Apartments() {
             {a.status === "Pending" && (
               <div className="grid grid-cols-2 gap-2">
                 <Button variant="outline" onClick={() => { setStatus(a.id, "Rejected"); toast(`${a.name} rejected`); }}>Reject</Button>
-                <Button variant="coral" onClick={() => { setStatus(a.id, "Active"); toast.success(`${a.name} is now active`); }}>Approve</Button>
+                <Button variant="brand" onClick={() => { setStatus(a.id, "Active"); toast.success(`${a.name} is now active`); }}>Approve</Button>
               </div>
             )}
             {a.status === "Active" && (

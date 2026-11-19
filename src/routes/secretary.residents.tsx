@@ -36,7 +36,7 @@ function Residents() {
               </div>
               <div className="grid grid-cols-2 gap-2">
                 <Button variant="outline" onClick={() => { updateFlat(f.id, { reg: "Deactivated" }); toast("Registration rejected"); }}>Reject</Button>
-                <Button variant="coral" onClick={() => { updateFlat(f.id, { reg: "Approved" }); toast.success(`${f.owner} approved — notified`); }}>Approve</Button>
+                <Button variant="brand" onClick={() => { updateFlat(f.id, { reg: "Approved" }); toast.success(`${f.owner} approved — notified`); }}>Approve</Button>
               </div>
             </Tile>
           ))}

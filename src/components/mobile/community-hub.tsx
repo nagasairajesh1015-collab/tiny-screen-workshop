@@ -126,7 +126,7 @@ export function CommunityHub({ manage }: { manage: boolean }) {
                     <div className="font-display font-semibold">{fd.name}</div>
                     <p className="text-sm text-muted-foreground">{fd.purpose}</p>
                   </div>
-                  <Pill tone={closed ? "success" : "coral"}>{closed ? "Completed" : `Closes ${fd.closes.slice(0, 6)}`}</Pill>
+                  <Pill tone={closed ? "success" : "brand"}>{closed ? "Completed" : `Closes ${fd.closes.slice(0, 6)}`}</Pill>
                 </div>
                 <Progress value={pct} />
                 <div className="flex justify-between text-xs text-muted-foreground">
@@ -137,7 +137,7 @@ export function CommunityHub({ manage }: { manage: boolean }) {
                   fd.mine > 0 ? (
                     <div className="rounded-xl bg-success-soft px-3 py-2 text-xs font-semibold text-success">You contributed {inr(fd.mine)}</div>
                   ) : !closed && (
-                    <Button variant="coral" className="w-full" onClick={() => { s.contribute(fd.id, fd.perUnit); toast.success(`Contributed ${inr(fd.perUnit)}`); }}>
+                    <Button variant="brand" className="w-full" onClick={() => { s.contribute(fd.id, fd.perUnit); toast.success(`Contributed ${inr(fd.perUnit)}`); }}>
                       Contribute {inr(fd.perUnit)} (suggested)
                     </Button>
                   )
@@ -170,7 +170,7 @@ function CreateSheet({ tab, open, onClose }: { tab: Tab; open: boolean; onClose:
   };
   const [l1, l2, l3, l4] = labels[tab];
   const save = () => {
-    if (!a.trim() || !b.trim()) return toast.error("Please fill in the first two fields.");
+    if (!a.trim() || !b.trim()) return void toast.error("Please fill in the first two fields.");
     if (tab === "notices") s.addNotice({ title: a, body: b, tag });
     if (tab === "events") s.addEvent({ title: a, description: b, date: c || "TBA", venue: d || "Clubhouse" });
     if (tab === "polls") s.addPoll(a, b.split(",").map((x) => x.trim()).filter(Boolean), c || "In 7 days");
@@ -186,7 +186,7 @@ function CreateSheet({ tab, open, onClose }: { tab: Tab; open: boolean; onClose:
         {l3 && <Field label={l3}><input className={inputCls} value={c} onChange={(e) => setC(e.target.value)} /></Field>}
         {l4 && <Field label={l4}><input className={inputCls} value={d} onChange={(e) => setD(e.target.value)} /></Field>}
         {tab === "notices" && <Field label="Type"><NativeSelect value={tag} onChange={(v) => setTag(v as Notice["tag"])} options={["General", "Maintenance", "Urgent", "Event"]} /></Field>}
-        <Button variant="coral" size="lg" className="w-full" onClick={save}>Publish</Button>
+        <Button variant="brand" size="lg" className="w-full" onClick={save}>Publish</Button>
       </div>
     </BottomSheet>
   );

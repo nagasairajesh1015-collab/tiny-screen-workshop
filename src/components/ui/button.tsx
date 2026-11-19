@@ -19,7 +19,8 @@ const buttonVariants = cva(
         ink: "surface-ink shadow-card hover:opacity-90",
         soft: "bg-accent text-accent-foreground hover:bg-accent/80",
         success: "bg-success text-primary-foreground hover:bg-success/90",
-        coral: "surface-coral shadow-coral hover:opacity-95",
+        brand: "surface-brand shadow-brand hover:opacity-95",
+        alert: "surface-alert shadow-card hover:opacity-95",
       },
       size: {
         default: "h-9 px-4 py-2",

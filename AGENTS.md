@@ -28,3 +28,8 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+- Read zustand state with plain selectors (`useDemo((s) => s.list)`) and filter outside the hook; selectors that return new arrays cause an infinite render loop.
+- Shared phone UI pieces live in `src/components/mobile/` (kit, shell); screens compose them so the design stays consistent.
+- Pure business rules (dues, UTR duplicates, gate pass checks) live in `src/lib/*.ts` with tests beside them.

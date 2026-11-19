@@ -23,7 +23,7 @@ function Expenses() {
   const max = byCat[0]?.[1] ?? 1;
 
   return (
-    <Screen title="Expenses" subtitle={MONTH} action={<Button variant="coral" size="sm" onClick={() => setOpen(true)}><Plus /> Add</Button>}>
+    <Screen title="Expenses" subtitle={MONTH} action={<Button variant="brand" size="sm" onClick={() => setOpen(true)}><Plus /> Add</Button>}>
       <Tile className="space-y-3">
         <div className="text-xs font-bold uppercase tracking-[0.12em] text-muted-foreground">Financial summary</div>
         {[["Opening balance", s.opening, ""], ["+ Collections", s.collections, "text-success"], ["− Expenses", s.expenses, "text-destructive"]].map(([l, v, c]) => (
@@ -75,7 +75,7 @@ function Expenses() {
 
 function AddExpense({ open, onClose }: { open: boolean; onClose: () => void }) {
   const { categories, addExpense, addCategory } = useDemo();
-  const [category, setCategory] = useState(categories[0]);
+  const [category, setCategory] = useState(categories[0] ?? "Other expenses");
   const [custom, setCustom] = useState("");
   const [description, setDescription] = useState("");
   const [amount, setAmount] = useState("");
@@ -96,9 +96,9 @@ function AddExpense({ open, onClose }: { open: boolean; onClose: () => void }) {
           <Paperclip className="size-4" /> {bill || "Upload bill / invoice"}
           <input type="file" className="hidden" onChange={(e) => setBill(e.target.files?.[0]?.name ?? "")} />
         </label>
-        <Button variant="coral" size="lg" className="w-full" onClick={() => {
+        <Button variant="brand" size="lg" className="w-full" onClick={() => {
           const cat = isCustom ? custom.trim() : category;
-          if (!cat || !Number(amount)) return toast.error("Enter a category and amount.");
+          if (!cat || !Number(amount)) return void toast.error("Enter a category and amount.");
           if (isCustom) addCategory(cat);
           addExpense({ category: cat, description: description || cat, amount: Number(amount), mode, date: todayLabel() });
           toast.success("Expense added");

@@ -55,7 +55,7 @@ function Operations() {
       )}
       {tab === "emergency" && (
         <div className="space-y-3">
-          <Button variant="coral" size="lg" className="w-full" onClick={() => { notify("resident", "Emergency announcement", "Please follow security instructions immediately."); notify("guard", "Emergency announcement", "Emergency alert sent to all residents."); toast.success("Emergency alert sent to all residents"); }}>
+          <Button variant="brand" size="lg" className="w-full" onClick={() => { notify("resident", "Emergency announcement", "Please follow security instructions immediately."); notify("guard", "Emergency announcement", "Emergency alert sent to all residents."); toast.success("Emergency alert sent to all residents"); }}>
             <Siren /> Send emergency alert
           </Button>
           <Tile className="divide-y divide-border py-1">

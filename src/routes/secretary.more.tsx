@@ -27,7 +27,7 @@ function More() {
             <span className="text-sm font-semibold leading-tight">{i.label}</span>
           </Link>
         ))}
-        <Link to="/secretary/operations" className="flex min-h-28 flex-col justify-between rounded-2xl surface-coral p-4 shadow-coral">
+        <Link to="/secretary/operations" className="flex min-h-28 flex-col justify-between rounded-2xl surface-brand p-4 shadow-brand">
           <Siren className="size-6" />
           <span className="text-sm font-semibold leading-tight">Emergency alert</span>
         </Link>

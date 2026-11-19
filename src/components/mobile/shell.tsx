@@ -1,9 +1,9 @@
 import { useState, type ReactNode } from "react";
 import { Link, type LinkProps } from "@tanstack/react-router";
-import { Bell, LogOut } from "lucide-react";
+import { Bell, Building2, ChevronDown, LogOut } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { APARTMENT, useDemo, type Role } from "@/lib/demo-store";
-import { BottomSheet, Empty } from "./kit";
+import { BottomSheet, Empty, Initials } from "./kit";
 import { cn } from "@/lib/utils";
 
 export function PhoneFrame({ children }: { children: ReactNode }) {
@@ -17,58 +17,61 @@ export function PhoneFrame({ children }: { children: ReactNode }) {
   );
 }
 
-export interface NavItem { to: LinkProps["to"]; label: string; icon: LucideIcon; exact?: boolean }
+export interface NavItem { to: NavTo; label: string; icon: LucideIcon; exact?: boolean | undefined }
+type NavTo = Exclude<LinkProps["to"], undefined>;
 
-const ROLE_LABEL: Record<Role, string> = { admin: "Admin", secretary: "Secretary", resident: "Owner · A-302", guard: "Security · Gate 1" };
+const ROLE_LABEL: Record<Role, string> = { admin: "Platform admin", secretary: "Secretary", resident: "Owner · A-302", guard: "Security · Gate 1" };
+const ROLE_PERSON: Record<Role, string> = { admin: "Platform Admin", secretary: "Arvind Menon", resident: "Priya Sharma", guard: "Mohan Lal" };
 
-export function RoleShell({ role, nav, children }: { role: Role; nav: NavItem[]; children: ReactNode }) {
+export function RoleShell({ role, nav, profileTo, children }: { role: Role; nav: NavItem[]; profileTo?: NavTo | undefined; children: ReactNode }) {
   const [open, setOpen] = useState(false);
   const all = useDemo((s) => s.notifications);
   const markAllRead = useDemo((s) => s.markAllRead);
   const mine = all.filter((n) => n.role === role);
   const unread = mine.filter((n) => !n.read).length;
+  const person = ROLE_PERSON[role];
 
   return (
     <PhoneFrame>
-      <header className="flex items-center justify-between gap-3 border-b border-border/60 bg-background/90 px-4 pb-3 pt-4 backdrop-blur">
-        <div className="flex min-w-0 items-center gap-2.5">
-          <span className="grid size-9 place-items-center rounded-xl surface-coral font-display text-sm font-bold">R</span>
+      <header className="flex items-center justify-between gap-3 bg-background px-4 pb-3 pt-4">
+        <Link to="/" aria-label="Switch role" className="flex min-w-0 items-center gap-2.5">
+          <span className="grid size-10 shrink-0 place-items-center rounded-xl surface-ink shadow-card"><Building2 className="size-5" /></span>
           <div className="min-w-0 leading-tight">
-            <div className="truncate font-display text-sm font-semibold">{role === "admin" ? "ResiCore Admin" : APARTMENT}</div>
-            <div className="truncate text-[11px] font-medium text-muted-foreground">{ROLE_LABEL[role]}</div>
+            <div className="text-[10px] font-bold uppercase tracking-[0.14em] text-primary">ResiCore</div>
+            <div className="flex items-center gap-1 truncate font-display text-[15px] font-bold text-foreground">
+              <span className="truncate">{role === "admin" ? "Admin console" : APARTMENT}</span>
+              <ChevronDown className="size-3.5 shrink-0 text-muted-foreground" />
+            </div>
+            <span className="mt-0.5 inline-flex rounded-md bg-ink px-1.5 py-px text-[9px] font-bold uppercase tracking-wider text-ink-foreground">{ROLE_LABEL[role]}</span>
           </div>
-        </div>
-        <div className="flex items-center gap-1.5">
-          <button onClick={() => setOpen(true)} aria-label="Notifications" className="relative grid size-10 place-items-center rounded-xl bg-card text-foreground shadow-card">
+        </Link>
+        <div className="flex items-center gap-2">
+          <button onClick={() => setOpen(true)} aria-label="Notifications" className="relative grid size-10 place-items-center rounded-full border border-border bg-card text-foreground">
             <Bell className="size-[18px]" />
             {unread > 0 && (
-              <span className="absolute -right-1 -top-1 grid min-w-5 place-items-center rounded-full bg-primary px-1 text-[10px] font-bold text-primary-foreground">{unread}</span>
+              <span className="absolute -right-0.5 -top-0.5 grid min-w-[18px] place-items-center rounded-full bg-alert px-1 text-[10px] font-bold text-destructive-foreground ring-2 ring-background">{unread}</span>
             )}
           </button>
-          <Link to="/" aria-label="Switch role" className="grid size-10 place-items-center rounded-xl bg-card text-muted-foreground shadow-card">
-            <LogOut className="size-[18px]" />
-          </Link>
+          {profileTo ? (
+            <Link to={profileTo} aria-label="My profile"><Initials name={person} className="size-10 rounded-full bg-ink text-ink-foreground" /></Link>
+          ) : (
+            <Link to="/" aria-label="Switch role" className="grid size-10 place-items-center rounded-full border border-border bg-card text-muted-foreground"><LogOut className="size-[18px]" /></Link>
+          )}
         </div>
       </header>
 
-      <main className="no-scrollbar flex-1 overflow-y-auto">{children}</main>
+      <main className="no-scrollbar flex-1 overflow-y-auto pb-24">{children}</main>
 
-      <nav className="grid border-t border-border/60 bg-card px-2 pb-[max(env(safe-area-inset-bottom),0.6rem)] pt-2" style={{ gridTemplateColumns: `repeat(${nav.length}, minmax(0, 1fr))` }}>
+      <nav className="absolute inset-x-3 bottom-[max(env(safe-area-inset-bottom),0.75rem)] z-30 flex items-center justify-between gap-1 rounded-full border border-border/70 bg-card/95 p-1.5 shadow-card backdrop-blur">
         {nav.map((n) => (
           <Link
             key={String(n.to)}
             to={n.to}
-            activeOptions={{ exact: n.exact }}
-            className="group flex flex-col items-center gap-1 rounded-xl py-1 text-[11px] font-semibold text-muted-foreground data-[status=active]:text-foreground"
+            activeOptions={{ exact: n.exact ?? false }}
+            className="flex min-w-0 flex-1 flex-col items-center justify-center gap-0.5 rounded-full py-1.5 text-[10px] font-semibold text-muted-foreground transition data-[status=active]:bg-ink data-[status=active]:text-ink-foreground"
           >
-            {({ isActive }: { isActive: boolean }) => (
-              <>
-                <span className={cn("grid h-8 w-12 place-items-center rounded-full transition", isActive && "bg-accent text-accent-foreground")}>
-                  <n.icon className="size-5" />
-                </span>
-                {n.label}
-              </>
-            )}
+            <n.icon className="size-[18px]" />
+            <span className="truncate">{n.label}</span>
           </Link>
         ))}
       </nav>

@@ -53,7 +53,7 @@ function Parking() {
             <Row key={v.id} left={<span className="grid size-10 place-items-center rounded-xl bg-muted"><Car className="size-4 text-muted-foreground" /></span>}
               title={v.number} subtitle={`${v.model} · ${v.flatId} · ${v.owner}`}
               right={v.status === "Pending"
-                ? <Button size="sm" variant="coral" onClick={() => { s.approveVehicle(v.id); toast.success("Vehicle approved"); }}>Approve</Button>
+                ? <Button size="sm" variant="brand" onClick={() => { s.approveVehicle(v.id); toast.success("Vehicle approved"); }}>Approve</Button>
                 : <Pill>{v.type}</Pill>} />
           ))}
         </Tile>
@@ -61,7 +61,7 @@ function Parking() {
 
       {tab === "reports" && (
         <div className="space-y-2.5">
-          <Button variant="coral" className="w-full" onClick={() => setReport(true)}><AlertTriangle /> Report wrong parking</Button>
+          <Button variant="brand" className="w-full" onClick={() => setReport(true)}><AlertTriangle /> Report wrong parking</Button>
           {s.parkingReports.length === 0 && <Empty>No reports.</Empty>}
           {s.parkingReports.map((r) => (
             <Tile key={r.id} className="space-y-2">
@@ -82,7 +82,7 @@ function Parking() {
             <Field label="Assigned flat">
               <NativeSelect value={slot.flatId ?? "— Free —"} onChange={(v) => setSlot({ ...slot, flatId: v === "— Free —" ? undefined : v })} options={["— Free —", ...s.flats.map((f) => f.id)]} />
             </Field>
-            <Button variant="coral" size="lg" className="w-full" onClick={() => { s.assignSlot(slot.id, slot.flatId); toast.success(slot.flatId ? `${slot.id} assigned to ${slot.flatId}` : `${slot.id} freed`); setSlot(null); }}>Save</Button>
+            <Button variant="brand" size="lg" className="w-full" onClick={() => { s.assignSlot(slot.id, slot.flatId); toast.success(slot.flatId ? `${slot.id} assigned to ${slot.flatId}` : `${slot.id} freed`); setSlot(null); }}>Save</Button>
           </div>
         )}
       </BottomSheet>
@@ -107,8 +107,8 @@ function ReportSheet({ open, onClose }: { open: boolean; onClose: () => void }) 
           <Camera className="size-4" /> {photo || "Add parking photo"}
           <input type="file" accept="image/*" className="hidden" onChange={(e) => setPhoto(e.target.files?.[0]?.name ?? "")} />
         </label>
-        <Button variant="coral" size="lg" className="w-full" onClick={() => {
-          if (!v || !description) return toast.error("Add a short description.");
+        <Button variant="brand" size="lg" className="w-full" onClick={() => {
+          if (!v || !description) return void toast.error("Add a short description.");
           s.reportParking({ vehicle, flatId: v.flatId, description });
           toast.success(`Report sent to ${v.flatId}`);
           setDescription(""); setPhoto(""); onClose();

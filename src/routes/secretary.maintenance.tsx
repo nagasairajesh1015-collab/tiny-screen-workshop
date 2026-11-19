@@ -46,7 +46,7 @@ function Maintenance() {
 
       {tab === "dues" && (
         <>
-          <Button variant="coral" className="w-full" disabled={unpaid.length === 0} onClick={() => { sendReminders(unpaid.map((f) => f.id)); toast.success(`Reminder sent to ${unpaid.length} unpaid flats`); }}>
+          <Button variant="brand" className="w-full" disabled={unpaid.length === 0} onClick={() => { sendReminders(unpaid.map((f) => f.id)); toast.success(`Reminder sent to ${unpaid.length} unpaid flats`); }}>
             <BellRing /> Remind all unpaid ({unpaid.length})
           </Button>
           <Segmented value={filter} onChange={setFilter} options={[
@@ -130,7 +130,7 @@ function Maintenance() {
       <BottomSheet open={!!cashFor} onClose={() => setCashFor(null)} title={`Cash payment · ${cashFor?.id}`}>
         <div className="space-y-3.5">
           <Field label="Amount received (₹)"><input className={inputCls} inputMode="numeric" value={cashAmt} onChange={(e) => setCashAmt(e.target.value)} /></Field>
-          <Button variant="coral" size="lg" className="w-full" onClick={() => {
+          <Button variant="brand" size="lg" className="w-full" onClick={() => {
             const n = Number(cashAmt);
             if (!cashFor || !n) return;
             markCashPaid(cashFor.id, n);
@@ -148,7 +148,7 @@ function Maintenance() {
           </div>
           <Field label="Due date (day of month)"><input className={inputCls} defaultValue="10" /></Field>
           <p className="text-xs text-muted-foreground">Flat-specific amounts can be set from each flat's page.</p>
-          <Button variant="coral" size="lg" className="w-full" onClick={() => { toast.success("Settings saved"); setSettings(false); }}>Save</Button>
+          <Button variant="brand" size="lg" className="w-full" onClick={() => { toast.success("Settings saved"); setSettings(false); }}>Save</Button>
         </div>
       </BottomSheet>
     </Screen>

@@ -19,6 +19,15 @@ import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as AdminApartmentsRouteImport } from './routes/admin.apartments'
 import { Route as AdminSubscriptionsRouteImport } from './routes/admin.subscriptions'
 import { Route as AdminUsersRouteImport } from './routes/admin.users'
+import { Route as GuardIndexRouteImport } from './routes/guard.index'
+import { Route as GuardEntryRouteImport } from './routes/guard.entry'
+import { Route as GuardHistoryRouteImport } from './routes/guard.history'
+import { Route as ResidentIndexRouteImport } from './routes/resident.index'
+import { Route as ResidentCommunityRouteImport } from './routes/resident.community'
+import { Route as ResidentComplaintsRouteImport } from './routes/resident.complaints'
+import { Route as ResidentPayRouteImport } from './routes/resident.pay'
+import { Route as ResidentProfileRouteImport } from './routes/resident.profile'
+import { Route as ResidentVisitorsRouteImport } from './routes/resident.visitors'
 import { Route as SecretaryIndexRouteImport } from './routes/secretary.index'
 import { Route as SecretaryCommunityRouteImport } from './routes/secretary.community'
 import { Route as SecretaryComplaintsRouteImport } from './routes/secretary.complaints'
@@ -81,6 +90,51 @@ const AdminUsersRoute = AdminUsersRouteImport.update({
   path: '/users',
   getParentRoute: () => AdminRoute,
 } as any)
+const GuardIndexRoute = GuardIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => GuardRoute,
+} as any)
+const GuardEntryRoute = GuardEntryRouteImport.update({
+  id: '/entry',
+  path: '/entry',
+  getParentRoute: () => GuardRoute,
+} as any)
+const GuardHistoryRoute = GuardHistoryRouteImport.update({
+  id: '/history',
+  path: '/history',
+  getParentRoute: () => GuardRoute,
+} as any)
+const ResidentIndexRoute = ResidentIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ResidentRoute,
+} as any)
+const ResidentCommunityRoute = ResidentCommunityRouteImport.update({
+  id: '/community',
+  path: '/community',
+  getParentRoute: () => ResidentRoute,
+} as any)
+const ResidentComplaintsRoute = ResidentComplaintsRouteImport.update({
+  id: '/complaints',
+  path: '/complaints',
+  getParentRoute: () => ResidentRoute,
+} as any)
+const ResidentPayRoute = ResidentPayRouteImport.update({
+  id: '/pay',
+  path: '/pay',
+  getParentRoute: () => ResidentRoute,
+} as any)
+const ResidentProfileRoute = ResidentProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => ResidentRoute,
+} as any)
+const ResidentVisitorsRoute = ResidentVisitorsRouteImport.update({
+  id: '/visitors',
+  path: '/visitors',
+  getParentRoute: () => ResidentRoute,
+} as any)
 const SecretaryIndexRoute = SecretaryIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -140,13 +194,20 @@ const SecretaryFlatFlatIdRoute = SecretaryFlatFlatIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
-  '/guard': typeof GuardRoute
+  '/guard': typeof GuardRouteWithChildren
   '/register': typeof RegisterRoute
-  '/resident': typeof ResidentRoute
+  '/resident': typeof ResidentRouteWithChildren
   '/secretary': typeof SecretaryRouteWithChildren
   '/admin/apartments': typeof AdminApartmentsRoute
   '/admin/subscriptions': typeof AdminSubscriptionsRoute
   '/admin/users': typeof AdminUsersRoute
+  '/guard/entry': typeof GuardEntryRoute
+  '/guard/history': typeof GuardHistoryRoute
+  '/resident/community': typeof ResidentCommunityRoute
+  '/resident/complaints': typeof ResidentComplaintsRoute
+  '/resident/pay': typeof ResidentPayRoute
+  '/resident/profile': typeof ResidentProfileRoute
+  '/resident/visitors': typeof ResidentVisitorsRoute
   '/secretary/community': typeof SecretaryCommunityRoute
   '/secretary/complaints': typeof SecretaryComplaintsRoute
   '/secretary/expenses': typeof SecretaryExpensesRoute
@@ -157,17 +218,24 @@ export interface FileRoutesByFullPath {
   '/secretary/residents': typeof SecretaryResidentsRoute
   '/secretary/visitors': typeof SecretaryVisitorsRoute
   '/admin/': typeof AdminIndexRoute
+  '/guard/': typeof GuardIndexRoute
+  '/resident/': typeof ResidentIndexRoute
   '/secretary/': typeof SecretaryIndexRoute
   '/secretary/flat/$flatId': typeof SecretaryFlatFlatIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/guard': typeof GuardRoute
   '/register': typeof RegisterRoute
-  '/resident': typeof ResidentRoute
   '/admin/apartments': typeof AdminApartmentsRoute
   '/admin/subscriptions': typeof AdminSubscriptionsRoute
   '/admin/users': typeof AdminUsersRoute
+  '/guard/entry': typeof GuardEntryRoute
+  '/guard/history': typeof GuardHistoryRoute
+  '/resident/community': typeof ResidentCommunityRoute
+  '/resident/complaints': typeof ResidentComplaintsRoute
+  '/resident/pay': typeof ResidentPayRoute
+  '/resident/profile': typeof ResidentProfileRoute
+  '/resident/visitors': typeof ResidentVisitorsRoute
   '/secretary/community': typeof SecretaryCommunityRoute
   '/secretary/complaints': typeof SecretaryComplaintsRoute
   '/secretary/expenses': typeof SecretaryExpensesRoute
@@ -178,6 +246,8 @@ export interface FileRoutesByTo {
   '/secretary/residents': typeof SecretaryResidentsRoute
   '/secretary/visitors': typeof SecretaryVisitorsRoute
   '/admin': typeof AdminIndexRoute
+  '/guard': typeof GuardIndexRoute
+  '/resident': typeof ResidentIndexRoute
   '/secretary': typeof SecretaryIndexRoute
   '/secretary/flat/$flatId': typeof SecretaryFlatFlatIdRoute
 }
@@ -185,13 +255,20 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
-  '/guard': typeof GuardRoute
+  '/guard': typeof GuardRouteWithChildren
   '/register': typeof RegisterRoute
-  '/resident': typeof ResidentRoute
+  '/resident': typeof ResidentRouteWithChildren
   '/secretary': typeof SecretaryRouteWithChildren
   '/admin/apartments': typeof AdminApartmentsRoute
   '/admin/subscriptions': typeof AdminSubscriptionsRoute
   '/admin/users': typeof AdminUsersRoute
+  '/guard/entry': typeof GuardEntryRoute
+  '/guard/history': typeof GuardHistoryRoute
+  '/resident/community': typeof ResidentCommunityRoute
+  '/resident/complaints': typeof ResidentComplaintsRoute
+  '/resident/pay': typeof ResidentPayRoute
+  '/resident/profile': typeof ResidentProfileRoute
+  '/resident/visitors': typeof ResidentVisitorsRoute
   '/secretary/community': typeof SecretaryCommunityRoute
   '/secretary/complaints': typeof SecretaryComplaintsRoute
   '/secretary/expenses': typeof SecretaryExpensesRoute
@@ -202,6 +279,8 @@ export interface FileRoutesById {
   '/secretary/residents': typeof SecretaryResidentsRoute
   '/secretary/visitors': typeof SecretaryVisitorsRoute
   '/admin/': typeof AdminIndexRoute
+  '/guard/': typeof GuardIndexRoute
+  '/resident/': typeof ResidentIndexRoute
   '/secretary/': typeof SecretaryIndexRoute
   '/secretary/flat/$flatId': typeof SecretaryFlatFlatIdRoute
 }
@@ -217,6 +296,13 @@ export interface FileRouteTypes {
     | '/admin/apartments'
     | '/admin/subscriptions'
     | '/admin/users'
+    | '/guard/entry'
+    | '/guard/history'
+    | '/resident/community'
+    | '/resident/complaints'
+    | '/resident/pay'
+    | '/resident/profile'
+    | '/resident/visitors'
     | '/secretary/community'
     | '/secretary/complaints'
     | '/secretary/expenses'
@@ -227,17 +313,24 @@ export interface FileRouteTypes {
     | '/secretary/residents'
     | '/secretary/visitors'
     | '/admin/'
+    | '/guard/'
+    | '/resident/'
     | '/secretary/'
     | '/secretary/flat/$flatId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/guard'
     | '/register'
-    | '/resident'
     | '/admin/apartments'
     | '/admin/subscriptions'
     | '/admin/users'
+    | '/guard/entry'
+    | '/guard/history'
+    | '/resident/community'
+    | '/resident/complaints'
+    | '/resident/pay'
+    | '/resident/profile'
+    | '/resident/visitors'
     | '/secretary/community'
     | '/secretary/complaints'
     | '/secretary/expenses'
@@ -248,6 +341,8 @@ export interface FileRouteTypes {
     | '/secretary/residents'
     | '/secretary/visitors'
     | '/admin'
+    | '/guard'
+    | '/resident'
     | '/secretary'
     | '/secretary/flat/$flatId'
   id:
@@ -261,6 +356,13 @@ export interface FileRouteTypes {
     | '/admin/apartments'
     | '/admin/subscriptions'
     | '/admin/users'
+    | '/guard/entry'
+    | '/guard/history'
+    | '/resident/community'
+    | '/resident/complaints'
+    | '/resident/pay'
+    | '/resident/profile'
+    | '/resident/visitors'
     | '/secretary/community'
     | '/secretary/complaints'
     | '/secretary/expenses'
@@ -271,6 +373,8 @@ export interface FileRouteTypes {
     | '/secretary/residents'
     | '/secretary/visitors'
     | '/admin/'
+    | '/guard/'
+    | '/resident/'
     | '/secretary/'
     | '/secretary/flat/$flatId'
   fileRoutesById: FileRoutesById
@@ -278,9 +382,9 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRouteWithChildren
-  GuardRoute: typeof GuardRoute
+  GuardRoute: typeof GuardRouteWithChildren
   RegisterRoute: typeof RegisterRoute
-  ResidentRoute: typeof ResidentRoute
+  ResidentRoute: typeof ResidentRouteWithChildren
   SecretaryRoute: typeof SecretaryRouteWithChildren
 }
 
@@ -355,6 +459,69 @@ declare module '@tanstack/react-router' {
       fullPath: '/admin/users'
       preLoaderRoute: typeof AdminUsersRouteImport
       parentRoute: typeof AdminRoute
+    }
+    '/guard/': {
+      id: '/guard/'
+      path: '/'
+      fullPath: '/guard/'
+      preLoaderRoute: typeof GuardIndexRouteImport
+      parentRoute: typeof GuardRoute
+    }
+    '/guard/entry': {
+      id: '/guard/entry'
+      path: '/entry'
+      fullPath: '/guard/entry'
+      preLoaderRoute: typeof GuardEntryRouteImport
+      parentRoute: typeof GuardRoute
+    }
+    '/guard/history': {
+      id: '/guard/history'
+      path: '/history'
+      fullPath: '/guard/history'
+      preLoaderRoute: typeof GuardHistoryRouteImport
+      parentRoute: typeof GuardRoute
+    }
+    '/resident/': {
+      id: '/resident/'
+      path: '/'
+      fullPath: '/resident/'
+      preLoaderRoute: typeof ResidentIndexRouteImport
+      parentRoute: typeof ResidentRoute
+    }
+    '/resident/community': {
+      id: '/resident/community'
+      path: '/community'
+      fullPath: '/resident/community'
+      preLoaderRoute: typeof ResidentCommunityRouteImport
+      parentRoute: typeof ResidentRoute
+    }
+    '/resident/complaints': {
+      id: '/resident/complaints'
+      path: '/complaints'
+      fullPath: '/resident/complaints'
+      preLoaderRoute: typeof ResidentComplaintsRouteImport
+      parentRoute: typeof ResidentRoute
+    }
+    '/resident/pay': {
+      id: '/resident/pay'
+      path: '/pay'
+      fullPath: '/resident/pay'
+      preLoaderRoute: typeof ResidentPayRouteImport
+      parentRoute: typeof ResidentRoute
+    }
+    '/resident/profile': {
+      id: '/resident/profile'
+      path: '/profile'
+      fullPath: '/resident/profile'
+      preLoaderRoute: typeof ResidentProfileRouteImport
+      parentRoute: typeof ResidentRoute
+    }
+    '/resident/visitors': {
+      id: '/resident/visitors'
+      path: '/visitors'
+      fullPath: '/resident/visitors'
+      preLoaderRoute: typeof ResidentVisitorsRouteImport
+      parentRoute: typeof ResidentRoute
     }
     '/secretary/': {
       id: '/secretary/'
@@ -452,6 +619,42 @@ const AdminRouteChildren: AdminRouteChildren = {
 
 const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
+interface GuardRouteChildren {
+  GuardEntryRoute: typeof GuardEntryRoute
+  GuardHistoryRoute: typeof GuardHistoryRoute
+  GuardIndexRoute: typeof GuardIndexRoute
+}
+
+const GuardRouteChildren: GuardRouteChildren = {
+  GuardEntryRoute: GuardEntryRoute,
+  GuardHistoryRoute: GuardHistoryRoute,
+  GuardIndexRoute: GuardIndexRoute,
+}
+
+const GuardRouteWithChildren = GuardRoute._addFileChildren(GuardRouteChildren)
+
+interface ResidentRouteChildren {
+  ResidentCommunityRoute: typeof ResidentCommunityRoute
+  ResidentComplaintsRoute: typeof ResidentComplaintsRoute
+  ResidentPayRoute: typeof ResidentPayRoute
+  ResidentProfileRoute: typeof ResidentProfileRoute
+  ResidentVisitorsRoute: typeof ResidentVisitorsRoute
+  ResidentIndexRoute: typeof ResidentIndexRoute
+}
+
+const ResidentRouteChildren: ResidentRouteChildren = {
+  ResidentCommunityRoute: ResidentCommunityRoute,
+  ResidentComplaintsRoute: ResidentComplaintsRoute,
+  ResidentPayRoute: ResidentPayRoute,
+  ResidentProfileRoute: ResidentProfileRoute,
+  ResidentVisitorsRoute: ResidentVisitorsRoute,
+  ResidentIndexRoute: ResidentIndexRoute,
+}
+
+const ResidentRouteWithChildren = ResidentRoute._addFileChildren(
+  ResidentRouteChildren,
+)
+
 interface SecretaryRouteChildren {
   SecretaryCommunityRoute: typeof SecretaryCommunityRoute
   SecretaryComplaintsRoute: typeof SecretaryComplaintsRoute
@@ -487,9 +690,9 @@ const SecretaryRouteWithChildren = SecretaryRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRouteWithChildren,
-  GuardRoute: GuardRoute,
+  GuardRoute: GuardRouteWithChildren,
   RegisterRoute: RegisterRoute,
-  ResidentRoute: ResidentRoute,
+  ResidentRoute: ResidentRouteWithChildren,
   SecretaryRoute: SecretaryRouteWithChildren,
 }
 export const routeTree = rootRouteImport

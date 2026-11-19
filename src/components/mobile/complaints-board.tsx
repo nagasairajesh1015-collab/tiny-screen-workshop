@@ -22,7 +22,7 @@ export function ComplaintsBoard({ manage }: { manage: boolean }) {
   return (
     <div className="space-y-4">
       {!manage && (
-        <Button variant="coral" size="lg" className="w-full" onClick={() => setCreating(true)}>
+        <Button variant="brand" size="lg" className="w-full" onClick={() => setCreating(true)}>
           <MessageSquarePlus /> Raise a complaint
         </Button>
       )}
@@ -89,7 +89,7 @@ function ManageSheet({ c, onClose }: { c: Complaint; onClose: () => void }) {
         </Field>
         <Field label="Assign to"><input className={inputCls} value={assigned} onChange={(e) => setAssigned(e.target.value)} placeholder="Staff or vendor" /></Field>
         <Field label="Comment to resident"><textarea className={cn(inputCls, "h-20 py-2")} value={comment} onChange={(e) => setComment(e.target.value)} /></Field>
-        <Button variant="coral" size="lg" className="w-full" onClick={() => {
+        <Button variant="brand" size="lg" className="w-full" onClick={() => {
           updateComplaint(c.id, { status, assigned: assigned || undefined }, comment || undefined);
           toast.success("Complaint updated — resident notified");
           onClose();
@@ -101,7 +101,7 @@ function ManageSheet({ c, onClose }: { c: Complaint; onClose: () => void }) {
 
 function NewComplaint({ open, onClose }: { open: boolean; onClose: () => void }) {
   const addComplaint = useDemo((s) => s.addComplaint);
-  const [category, setCategory] = useState(CATEGORIES[0]);
+  const [category, setCategory] = useState<string>(CATEGORIES[0] ?? "Other");
   const [area, setArea] = useState<"Flat" | "Common area">("Flat");
   const [priority, setPriority] = useState<Complaint["priority"]>("Medium");
   const [description, setDescription] = useState("");
@@ -119,8 +119,8 @@ function NewComplaint({ open, onClose }: { open: boolean; onClose: () => void })
           <Paperclip className="size-4" /> {file || "Attach photo or video"}
           <input type="file" accept="image/*,video/*" className="hidden" onChange={(e) => setFile(e.target.files?.[0]?.name ?? "")} />
         </label>
-        <Button variant="coral" size="lg" className="w-full" onClick={() => {
-          if (!description.trim()) return toast.error("Please describe the issue.");
+        <Button variant="brand" size="lg" className="w-full" onClick={() => {
+          if (!description.trim()) return void toast.error("Please describe the issue.");
           addComplaint({ flatId: ME_FLAT, resident: "Priya Sharma", category, area, priority, description });
           toast.success("Complaint submitted to the Secretary");
           setDescription(""); setFile(""); onClose();

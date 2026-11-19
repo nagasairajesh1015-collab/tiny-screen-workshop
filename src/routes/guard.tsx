@@ -9,7 +9,7 @@ function GuardLayout() {
     <RoleShell role="guard" nav={[
       { to: "/guard", label: "Gate", icon: LayoutDashboard, exact: true },
       { to: "/guard/entry", label: "New entry", icon: LogIn },
-      { to: "/guard/history", label: "History", icon: History },
+      { to: "/guard/history", label: "Gate log", icon: History },
     ]}>
       <Outlet />
     </RoleShell>
