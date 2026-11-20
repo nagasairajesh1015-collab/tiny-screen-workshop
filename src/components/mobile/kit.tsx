@@ -22,7 +22,7 @@ export function Section({ title, action, children, className }: { title: string;
   return (
     <section className={cn("space-y-2.5", className)}>
       <div className="flex items-center justify-between">
-        <h2 className="text-xs font-bold uppercase tracking-[0.12em] text-muted-foreground">{title}</h2>
+        <h2 className="font-display text-[17px] font-semibold text-foreground">{title}</h2>
         {action}
       </div>
       {children}
@@ -208,4 +208,20 @@ export function Hero({ children, className }: { children: ReactNode; className?:
 
 export function Eyebrow({ children, className }: { children: ReactNode; className?: string }) {
   return <div className={cn("text-[10px] font-bold uppercase tracking-[0.14em]", className)}>{children}</div>;
+}
+
+/** Circular progress ring used on Stitch hero cards. */
+export function Ring({ value, size = 64, children, className }: { value: number; size?: number; children?: ReactNode; className?: string }) {
+  const r = 15.5;
+  const c = 2 * Math.PI * r;
+  const v = Math.min(100, Math.max(0, value));
+  return (
+    <div className={cn("relative grid shrink-0 place-items-center", className)} style={{ width: size, height: size }}>
+      <svg viewBox="0 0 36 36" className="absolute inset-0 size-full -rotate-90" aria-hidden>
+        <circle cx="18" cy="18" r={r} fill="none" strokeWidth="3.2" className="stroke-ink-foreground/15" />
+        <circle cx="18" cy="18" r={r} fill="none" strokeWidth="3.2" strokeLinecap="round" className="stroke-alert" strokeDasharray={`${(v / 100) * c} ${c}`} />
+      </svg>
+      <div className="relative">{children}</div>
+    </div>
+  );
 }

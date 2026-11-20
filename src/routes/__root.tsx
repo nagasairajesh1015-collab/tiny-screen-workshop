@@ -84,7 +84,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "ResiCore — Apartment community management" },
       { name: "description", content: "ResiCore connects secretaries, owners, tenants and security in one apartment app." },
-      { name: "theme-color", content: "#0b192c" },
+      { name: "theme-color", content: "#14213d" },
       { property: "og:title", content: "ResiCore — Apartment community management" },
       { property: "og:description", content: "ResiCore connects secretaries, owners, tenants and security in one apartment app." },
       { property: "og:type", content: "website" },
@@ -100,7 +100,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap",
       },
     ],
   }),

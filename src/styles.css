@@ -5,15 +5,14 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * ResiCore design system — taken from the Google Stitch project
- * "ResiCore Apartment Management App": deep navy ink, teal action colour,
- * cool blue-white canvas, coral reserved for alerts / SOS.
- * Display: Plus Jakarta Sans. Body: Inter (loaded in __root head).
+ * ResiCore design system — Google Stitch project "ResiCore Apartment Management App",
+ * "60/30/10 Coastal" kit: Surface Cream canvas (60%), Deep Navy structure (30%),
+ * Sunset Coral focal actions (10%). Plus Jakarta Sans throughout (loaded in __root head).
  */
 
 @theme inline {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Plus Jakarta Sans", "Inter", ui-sans-serif, sans-serif;
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Plus Jakarta Sans", ui-sans-serif, sans-serif;
 
   --radius-sm: calc(var(--radius) - 6px);
   --radius-md: calc(var(--radius) - 4px);
@@ -70,59 +69,62 @@
 
 :root {
   --radius: 0.875rem;
-  --background: #f8f9ff;
-  --foreground: #0b1c30;
-  --card: #ffffff;
-  --card-foreground: #0b1c30;
-  --popover: #ffffff;
-  --popover-foreground: #0b1c30;
-  --primary: #00897b;
+  --background: #f4ede0;
+  --foreground: #14213d;
+  --card: #fffdf9;
+  --card-foreground: #14213d;
+  --popover: #fffdf9;
+  --popover-foreground: #14213d;
+  --primary: #e8513f;
   --primary-foreground: #ffffff;
-  --secondary: #eff4ff;
-  --secondary-foreground: #1e3e62;
-  --muted: #eef3fc;
-  --muted-foreground: #5b6779;
-  --accent: #dff6f2;
-  --accent-foreground: #006b5f;
-  --destructive: #d9412f;
+  --secondary: #ede2d0;
+  --secondary-foreground: #14213d;
+  --muted: #efe7d8;
+  --muted-foreground: #5a657c;
+  --accent: #ffe3dd;
+  --accent-foreground: #b3321f;
+  --destructive: #d63a2a;
   --destructive-foreground: #ffffff;
-  --border: #e1e8f5;
-  --input: #d5deee;
-  --ring: #00a896;
+  --border: #e4dac8;
+  --input: #dcd5c6;
+  --ring: #ff6b5b;
 
-  --ink: #0b192c;
-  --ink-soft: #1e3e62;
-  --ink-foreground: #f3f7ff;
-  --success: #00897b;
-  --success-soft: #dff6f2;
-  --warning: #b96a00;
-  --warning-soft: #fff1d9;
-  --info: #2f5f95;
-  --info-soft: #e3edff;
-  --danger-soft: #ffe7e2;
-  --alert: #f05a44;
+  --ink: #14213d;
+  --ink-soft: #1e3058;
+  --ink-foreground: #f7f1e6;
+  --success: #0b8a62;
+  --success-soft: #dcf3e8;
+  --warning: #a8650a;
+  --warning-soft: #fcedd2;
+  --info: #2a3b5c;
+  --info-soft: #e1e6f1;
+  --danger-soft: #ffe1db;
+  --alert: #ff6b5b;
 
-  --gradient-ink: linear-gradient(160deg, #0b192c 0%, #13294a 100%);
-  --gradient-brand: linear-gradient(135deg, #00a896 0%, #00897b 100%);
-  --gradient-alert: linear-gradient(135deg, #f46b55 0%, #e4472f 100%);
-  --gradient-hero-fade: linear-gradient(180deg, transparent 0%, rgb(11 25 44 / 0.35) 45%, #0b192c 100%);
-  --shadow-card: 0 1px 2px rgb(11 28 48 / 0.04), 0 8px 24px -14px rgb(11 28 48 / 0.18);
-  --shadow-brand: 0 12px 26px -12px rgb(0 137 123 / 0.55);
+  --gradient-ink:
+    repeating-linear-gradient(90deg, rgb(255 255 255 / 0.028) 0 1px, transparent 1px 22px),
+    radial-gradient(120% 80% at 100% 0%, rgb(255 107 91 / 0.16), transparent 55%),
+    linear-gradient(160deg, #14213d 0%, #1b2b4f 100%);
+  --gradient-brand: linear-gradient(135deg, #ff6b5b 0%, #e5483a 100%);
+  --gradient-alert: linear-gradient(135deg, #ff6b5b 0%, #d63a2a 100%);
+  --gradient-hero-fade: linear-gradient(180deg, transparent 0%, rgb(20 33 61 / 0.35) 45%, #14213d 100%);
+  --shadow-card: 0 1px 2px rgb(20 33 61 / 0.04), 0 10px 24px -16px rgb(20 33 61 / 0.22);
+  --shadow-brand: 0 12px 26px -12px rgb(229 72 58 / 0.6);
   --shadow-phone: 0 40px 90px -30px rgb(0 0 0 / 0.6);
 
-  --chart-1: #00a896;
-  --chart-2: #1e3e62;
-  --chart-3: #f05a44;
-  --chart-4: #b96a00;
-  --chart-5: #6886ae;
-  --sidebar: #f8f9ff;
-  --sidebar-foreground: #0b1c30;
-  --sidebar-primary: #00897b;
+  --chart-1: #ff6b5b;
+  --chart-2: #14213d;
+  --chart-3: #5a657c;
+  --chart-4: #f59e0b;
+  --chart-5: #10b981;
+  --sidebar: #f4ede0;
+  --sidebar-foreground: #14213d;
+  --sidebar-primary: #e8513f;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #eff4ff;
-  --sidebar-accent-foreground: #0b1c30;
-  --sidebar-border: #e1e8f5;
-  --sidebar-ring: #00a896;
+  --sidebar-accent: #ede2d0;
+  --sidebar-accent-foreground: #14213d;
+  --sidebar-border: #e4dac8;
+  --sidebar-ring: #ff6b5b;
 }
 
 @layer base {
@@ -190,8 +192,8 @@
 @utility phone-backdrop {
   background-color: var(--ink);
   background-image:
-    radial-gradient(circle at 20% 15%, rgb(0 168 150 / 0.22), transparent 40%),
-    radial-gradient(circle at 85% 85%, rgb(30 62 98 / 0.6), transparent 45%);
+    radial-gradient(circle at 20% 15%, rgb(255 107 91 / 0.22), transparent 40%),
+    radial-gradient(circle at 85% 85%, rgb(244 237 224 / 0.12), transparent 45%);
 }
 
 @keyframes rise-in {

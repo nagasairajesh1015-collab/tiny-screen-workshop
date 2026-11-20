@@ -20,7 +20,7 @@ export function PhoneFrame({ children }: { children: ReactNode }) {
 export interface NavItem { to: NavTo; label: string; icon: LucideIcon; exact?: boolean | undefined }
 type NavTo = Exclude<LinkProps["to"], undefined>;
 
-const ROLE_LABEL: Record<Role, string> = { admin: "Platform admin", secretary: "Secretary", resident: "Owner · A-302", guard: "Security · Gate 1" };
+const ROLE_LABEL: Record<Role, string> = { admin: "Super admin", secretary: "Secretary console", resident: "Owner · Flat A-302", guard: "Security · Gate 1" };
 const ROLE_PERSON: Record<Role, string> = { admin: "Platform Admin", secretary: "Arvind Menon", resident: "Priya Sharma", guard: "Mohan Lal" };
 
 export function RoleShell({ role, nav, profileTo, children }: { role: Role; nav: NavItem[]; profileTo?: NavTo | undefined; children: ReactNode }) {
@@ -33,42 +33,49 @@ export function RoleShell({ role, nav, profileTo, children }: { role: Role; nav:
 
   return (
     <PhoneFrame>
-      <header className="flex items-center justify-between gap-3 bg-background px-4 pb-3 pt-4">
-        <Link to="/" aria-label="Switch role" className="flex min-w-0 items-center gap-2.5">
-          <span className="grid size-10 shrink-0 place-items-center rounded-xl surface-ink shadow-card"><Building2 className="size-5" /></span>
-          <div className="min-w-0 leading-tight">
-            <div className="text-[10px] font-bold uppercase tracking-[0.14em] text-primary">ResiCore</div>
-            <div className="flex items-center gap-1 truncate font-display text-[15px] font-bold text-foreground">
-              <span className="truncate">{role === "admin" ? "Admin console" : APARTMENT}</span>
-              <ChevronDown className="size-3.5 shrink-0 text-muted-foreground" />
+      <header className="surface-ink px-4 pb-3 pt-4 text-ink-foreground">
+        <div className="flex items-center justify-between gap-3">
+          <Link to="/" aria-label="Switch role" className="flex min-w-0 items-center gap-2.5">
+            <span className="grid size-10 shrink-0 place-items-center rounded-xl surface-brand shadow-brand"><Building2 className="size-5" /></span>
+            <div className="min-w-0 leading-tight">
+              <div className="font-display text-[15px] font-bold">ResiCore</div>
+              <div className="mt-0.5 flex max-w-[11rem] items-center gap-1 rounded-md bg-ink-foreground/10 px-1.5 py-0.5 text-[11px] font-medium text-ink-foreground/85">
+                <span className="truncate">{role === "admin" ? "Platform management" : APARTMENT}</span>
+                <ChevronDown className="size-3 shrink-0" />
+              </div>
             </div>
-            <span className="mt-0.5 inline-flex rounded-md bg-ink px-1.5 py-px text-[9px] font-bold uppercase tracking-wider text-ink-foreground">{ROLE_LABEL[role]}</span>
-          </div>
-        </Link>
-        <div className="flex items-center gap-2">
-          <button onClick={() => setOpen(true)} aria-label="Notifications" className="relative grid size-10 place-items-center rounded-full border border-border bg-card text-foreground">
-            <Bell className="size-[18px]" />
-            {unread > 0 && (
-              <span className="absolute -right-0.5 -top-0.5 grid min-w-[18px] place-items-center rounded-full bg-alert px-1 text-[10px] font-bold text-destructive-foreground ring-2 ring-background">{unread}</span>
+          </Link>
+          <div className="flex items-center gap-2">
+            <button onClick={() => setOpen(true)} aria-label="Notifications" className="relative grid size-10 place-items-center rounded-full bg-ink-foreground/10 text-ink-foreground">
+              <Bell className="size-[18px]" />
+              {unread > 0 && (
+                <span className="absolute -right-0.5 -top-0.5 grid min-w-[18px] place-items-center rounded-full bg-alert px-1 text-[10px] font-bold text-destructive-foreground ring-2 ring-ink">{unread}</span>
+              )}
+            </button>
+            {profileTo ? (
+              <Link to={profileTo} aria-label="My profile"><Initials name={person} className="size-10 rounded-full surface-brand" /></Link>
+            ) : (
+              <Link to="/" aria-label="Switch role" className="grid size-10 place-items-center rounded-full bg-ink-foreground/10 text-ink-foreground"><LogOut className="size-[18px]" /></Link>
             )}
-          </button>
-          {profileTo ? (
-            <Link to={profileTo} aria-label="My profile"><Initials name={person} className="size-10 rounded-full bg-ink text-ink-foreground" /></Link>
-          ) : (
-            <Link to="/" aria-label="Switch role" className="grid size-10 place-items-center rounded-full border border-border bg-card text-muted-foreground"><LogOut className="size-[18px]" /></Link>
-          )}
+          </div>
+        </div>
+        <div className="mt-3 flex items-center justify-between">
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-ink-foreground/10 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.12em]">
+            <span className="size-1.5 rounded-full bg-alert" /> {ROLE_LABEL[role]}
+          </span>
+          <span className="text-xs font-medium text-ink-foreground/70">{person}</span>
         </div>
       </header>
 
       <main className="no-scrollbar flex-1 overflow-y-auto pb-24">{children}</main>
 
-      <nav className="absolute inset-x-3 bottom-[max(env(safe-area-inset-bottom),0.75rem)] z-30 flex items-center justify-between gap-1 rounded-full border border-border/70 bg-card/95 p-1.5 shadow-card backdrop-blur">
+      <nav className="absolute inset-x-3 bottom-[max(env(safe-area-inset-bottom),0.75rem)] z-30 flex items-center justify-between gap-1 rounded-[1.75rem] border border-border/70 bg-card/95 p-1.5 shadow-card backdrop-blur">
         {nav.map((n) => (
           <Link
             key={String(n.to)}
             to={n.to}
             activeOptions={{ exact: n.exact ?? false }}
-            className="flex min-w-0 flex-1 flex-col items-center justify-center gap-0.5 rounded-full py-1.5 text-[10px] font-semibold text-muted-foreground transition data-[status=active]:bg-ink data-[status=active]:text-ink-foreground"
+            className="flex min-w-0 flex-1 flex-col items-center justify-center gap-0.5 rounded-3xl py-1.5 text-[10px] font-semibold text-muted-foreground transition data-[status=active]:bg-ink data-[status=active]:text-ink-foreground data-[status=active]:[&_svg]:text-alert"
           >
             <n.icon className="size-[18px]" />
             <span className="truncate">{n.label}</span>
