@@ -1,0 +1,11 @@
+REVOKE EXECUTE ON FUNCTION public.is_platform_admin(uuid) FROM PUBLIC, anon;
+REVOKE EXECUTE ON FUNCTION public.has_society_role(uuid, uuid, public.user_role[]) FROM PUBLIC, anon;
+REVOKE EXECUTE ON FUNCTION public.is_society_member(uuid, uuid) FROM PUBLIC, anon;
+REVOKE EXECUTE ON FUNCTION public.is_society_manager(uuid, uuid) FROM PUBLIC, anon;
+GRANT EXECUTE ON FUNCTION public.is_platform_admin(uuid) TO authenticated;
+GRANT EXECUTE ON FUNCTION public.has_society_role(uuid, uuid, public.user_role[]) TO authenticated;
+GRANT EXECUTE ON FUNCTION public.is_society_member(uuid, uuid) TO authenticated;
+GRANT EXECUTE ON FUNCTION public.is_society_manager(uuid, uuid) TO authenticated;
+CREATE INDEX IF NOT EXISTS user_roles_user_idx ON public.user_roles (user_id);
+CREATE INDEX IF NOT EXISTS user_roles_society_idx ON public.user_roles (society_id);
+CREATE INDEX IF NOT EXISTS user_roles_unit_idx ON public.user_roles (unit_id);

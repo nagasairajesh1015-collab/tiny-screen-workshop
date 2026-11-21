@@ -11,8 +11,11 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminRouteImport } from './routes/admin'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as GuardRouteImport } from './routes/guard'
+import { Route as PendingRouteImport } from './routes/pending'
 import { Route as RegisterRouteImport } from './routes/register'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as ResidentRouteImport } from './routes/resident'
 import { Route as SecretaryRouteImport } from './routes/secretary'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
@@ -50,14 +53,29 @@ const AdminRoute = AdminRouteImport.update({
   path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const GuardRoute = GuardRouteImport.update({
   id: '/guard',
   path: '/guard',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PendingRoute = PendingRouteImport.update({
+  id: '/pending',
+  path: '/pending',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RegisterRoute = RegisterRouteImport.update({
   id: '/register',
   path: '/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ResidentRoute = ResidentRouteImport.update({
@@ -194,8 +212,11 @@ const SecretaryFlatFlatIdRoute = SecretaryFlatFlatIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
+  '/auth': typeof AuthRoute
   '/guard': typeof GuardRouteWithChildren
+  '/pending': typeof PendingRoute
   '/register': typeof RegisterRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/resident': typeof ResidentRouteWithChildren
   '/secretary': typeof SecretaryRouteWithChildren
   '/admin/apartments': typeof AdminApartmentsRoute
@@ -225,7 +246,10 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/pending': typeof PendingRoute
   '/register': typeof RegisterRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/admin/apartments': typeof AdminApartmentsRoute
   '/admin/subscriptions': typeof AdminSubscriptionsRoute
   '/admin/users': typeof AdminUsersRoute
@@ -255,8 +279,11 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
+  '/auth': typeof AuthRoute
   '/guard': typeof GuardRouteWithChildren
+  '/pending': typeof PendingRoute
   '/register': typeof RegisterRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/resident': typeof ResidentRouteWithChildren
   '/secretary': typeof SecretaryRouteWithChildren
   '/admin/apartments': typeof AdminApartmentsRoute
@@ -289,8 +316,11 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/admin'
+    | '/auth'
     | '/guard'
+    | '/pending'
     | '/register'
+    | '/reset-password'
     | '/resident'
     | '/secretary'
     | '/admin/apartments'
@@ -320,7 +350,10 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/auth'
+    | '/pending'
     | '/register'
+    | '/reset-password'
     | '/admin/apartments'
     | '/admin/subscriptions'
     | '/admin/users'
@@ -349,8 +382,11 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/admin'
+    | '/auth'
     | '/guard'
+    | '/pending'
     | '/register'
+    | '/reset-password'
     | '/resident'
     | '/secretary'
     | '/admin/apartments'
@@ -382,8 +418,11 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRouteWithChildren
+  AuthRoute: typeof AuthRoute
   GuardRoute: typeof GuardRouteWithChildren
+  PendingRoute: typeof PendingRoute
   RegisterRoute: typeof RegisterRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
   ResidentRoute: typeof ResidentRouteWithChildren
   SecretaryRoute: typeof SecretaryRouteWithChildren
 }
@@ -404,6 +443,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/guard': {
       id: '/guard'
       path: '/guard'
@@ -411,11 +457,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GuardRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/pending': {
+      id: '/pending'
+      path: '/pending'
+      fullPath: '/pending'
+      preLoaderRoute: typeof PendingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/register': {
       id: '/register'
       path: '/register'
       fullPath: '/register'
       preLoaderRoute: typeof RegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/resident': {
@@ -690,8 +750,11 @@ const SecretaryRouteWithChildren = SecretaryRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRouteWithChildren,
+  AuthRoute: AuthRoute,
   GuardRoute: GuardRouteWithChildren,
+  PendingRoute: PendingRoute,
   RegisterRoute: RegisterRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
   ResidentRoute: ResidentRouteWithChildren,
   SecretaryRoute: SecretaryRouteWithChildren,
 }

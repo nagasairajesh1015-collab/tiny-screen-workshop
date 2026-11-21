@@ -33,3 +33,6 @@ use the editor.
 - Read zustand state with plain selectors (`useDemo((s) => s.list)`) and filter outside the hook; selectors that return new arrays cause an infinite render loop.
 - Shared phone UI pieces live in `src/components/mobile/` (kit, shell); screens compose them so the design stays consistent.
 - Pure business rules (dues, UTR duplicates, gate pass checks) live in `src/lib/*.ts` with tests beside them.
+- Roles live only in `public.user_roles` (role + society_id + unit_id), checked in RLS via security-definer helpers (`is_platform_admin`, `is_society_member`, `is_society_manager`); never trust `profiles.role`, users can edit their own profile.
+- Automatic roles are granted by DB triggers only after email confirmation, so nobody can claim an email they don't own; everyone else lands on `/pending` until approved.
+- Where a signed-in person lands is decided by `homeForRoles` in `src/lib/auth-roles.ts`; the signed-in person is read with `useMe()` (browser only), refreshed by the single `onAuthStateChange` listener in `__root.tsx`.
