@@ -36,3 +36,4 @@ use the editor.
 - Roles live only in `public.user_roles` (role + society_id + unit_id), checked in RLS via security-definer helpers (`is_platform_admin`, `is_society_member`, `is_society_manager`); never trust `profiles.role`, users can edit their own profile.
 - Automatic roles are granted by DB triggers only after email confirmation, so nobody can claim an email they don't own; everyone else lands on `/pending` until approved.
 - Where a signed-in person lands is decided by `homeForRoles` in `src/lib/auth-roles.ts`; the signed-in person is read with `useMe()` (browser only), refreshed by the single `onAuthStateChange` listener in `__root.tsx`.
+- Each role section's layout (`/admin`, `/secretary`, `/resident`, `/guard`) is wrapped in `RoleGate`, which sends signed-in people to their own home unless `areasForRoles` allows that section; real data is still protected by RLS, the gate only stops browsing the wrong screens.

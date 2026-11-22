@@ -7,6 +7,7 @@
 - [x] Connect user's own Supabase project (linked: Resi_Core)
 - [x] Re-read Stitch (now cream/navy/coral) and retheme the whole app; new header, Secretary & Admin home
 - [x] Real sign-in (email + password), roles table, data locked down, pending-approval screen
+- [x] Signed-in people only see their own role's screens (secretary can't open owner/guard/admin)
 - [ ] Secretary approves residents/guards and assigns flats (real data)
 - [ ] Save real data in Supabase: flats, dues, visitors, complaints (replace sample data)
 - [ ] Restyle remaining Secretary and Admin inner screens screen-by-screen against Stitch (amenities, polls, reports, etc.)

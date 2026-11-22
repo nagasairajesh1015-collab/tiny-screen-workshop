@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { homeForRoles } from "./auth-roles";
+import { areasForRoles, homeForRoles } from "./auth-roles";
 
 const S = "a0000000-0000-0000-0000-000000000001";
 
@@ -18,5 +18,23 @@ describe("where a signed-in person lands", () => {
   });
   it("someone with no approved role waits for approval", () => {
     expect(homeForRoles([])).toBe("/pending");
+  });
+});
+
+describe("which sections a signed-in person may open", () => {
+  it("a secretary cannot open the owner / tenant screens", () => {
+    expect(areasForRoles([{ role: "SECRETARY", society_id: S }])).toEqual(["/secretary"]);
+  });
+  it("a secretary who also owns a flat can open both", () => {
+    expect(areasForRoles([{ role: "SECRETARY", society_id: S }, { role: "RESIDENT_OWNER", society_id: S }])).toEqual(["/secretary", "/resident"]);
+  });
+  it("an owner cannot open the secretary, guard or admin screens", () => {
+    expect(areasForRoles([{ role: "RESIDENT_OWNER", society_id: S }])).toEqual(["/resident"]);
+  });
+  it("a guard can only open the gate screens", () => {
+    expect(areasForRoles([{ role: "GUARD", society_id: S }])).toEqual(["/guard"]);
+  });
+  it("someone waiting for approval can open none", () => {
+    expect(areasForRoles([])).toEqual([]);
   });
 });

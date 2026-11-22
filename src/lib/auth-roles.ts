@@ -15,6 +15,22 @@ export function homeForRoles(rows: RoleRow[]): Home {
   return "/pending";
 }
 
+export type Area = Exclude<Home, "/pending">;
+
+/** Every section a signed-in person may open. A secretary who also owns a flat gets both. */
+export function areasForRoles(rows: RoleRow[]): Area[] {
+  const areas: Area[] = [];
+  if (rows.some((r) => r.role === "ADMIN" && r.society_id === null)) areas.push("/admin");
+  if (rows.some((r) => MANAGER.includes(r.role) && r.society_id)) areas.push("/secretary");
+  if (rows.some((r) => RESIDENT.includes(r.role) && r.society_id)) areas.push("/resident");
+  if (rows.some((r) => SECURITY.includes(r.role) && r.society_id)) areas.push("/guard");
+  return areas;
+}
+
+export const AREA_NAME: Record<Area, string> = {
+  "/admin": "Admin", "/secretary": "Secretary", "/resident": "Owner / Tenant", "/guard": "Security Guard",
+};
+
 export const ROLE_NAME: Record<DbRole, string> = {
   ADMIN: "Platform admin", CHAIRMAN: "Chairman", SECRETARY: "Secretary", TREASURER: "Treasurer",
   RESIDENT_OWNER: "Owner", RESIDENT_TENANT: "Tenant", GUARD: "Security guard", SUPERVISOR: "Security supervisor",

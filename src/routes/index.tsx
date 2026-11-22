@@ -43,6 +43,8 @@ function Welcome() {
               <LogIn className="size-4" /> Sign in or create account
             </Link>
           )}
+          {!me && (
+            <>
           <h2 className="pt-3 text-xs font-bold uppercase tracking-[0.12em] text-muted-foreground">Explore the demo (sample data)</h2>
           {ROLES.map((r) => (
             <Link key={r.to} to={r.to} className="flex items-center gap-3 rounded-2xl border border-border/60 bg-card p-3.5 shadow-card transition active:scale-[0.99]">
@@ -54,6 +56,8 @@ function Welcome() {
               <ArrowRight className="size-4 text-muted-foreground" />
             </Link>
           ))}
+            </>
+          )}
           <Link to="/register" className="mt-2 flex h-12 items-center justify-center gap-2 rounded-2xl surface-ink text-sm font-semibold shadow-card">
             Register a new apartment <ArrowRight className="size-4" />
           </Link>
